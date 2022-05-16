@@ -1,0 +1,2069 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2022-05-15T00:33:46Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/157009629",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "name": "Christ Community Church - The Plex",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6611358,
+              42.0729866
+            ],
+            [
+              -93.6611087,
+              42.072994
+            ],
+            [
+              -93.6610824,
+              42.0729549
+            ],
+            [
+              -93.6610592,
+              42.0729205
+            ],
+            [
+              -93.661097,
+              42.0729019
+            ],
+            [
+              -93.6609164,
+              42.0727089
+            ],
+            [
+              -93.6608049,
+              42.0727687
+            ],
+            [
+              -93.6607927,
+              42.0727752
+            ],
+            [
+              -93.6607825,
+              42.0727633
+            ],
+            [
+              -93.6606812,
+              42.0728162
+            ],
+            [
+              -93.660709,
+              42.0728473
+            ],
+            [
+              -93.660599,
+              42.0729057
+            ],
+            [
+              -93.6605712,
+              42.0729032
+            ],
+            [
+              -93.660572,
+              42.0728899
+            ],
+            [
+              -93.6605241,
+              42.072887
+            ],
+            [
+              -93.6603987,
+              42.0728793
+            ],
+            [
+              -93.6603975,
+              42.0728908
+            ],
+            [
+              -93.6603594,
+              42.0728892
+            ],
+            [
+              -93.6603578,
+              42.0729048
+            ],
+            [
+              -93.6603568,
+              42.0729135
+            ],
+            [
+              -93.6603561,
+              42.0729209
+            ],
+            [
+              -93.6602777,
+              42.0729158
+            ],
+            [
+              -93.6602758,
+              42.0729278
+            ],
+            [
+              -93.6601311,
+              42.072919
+            ],
+            [
+              -93.6601164,
+              42.0730381
+            ],
+            [
+              -93.6601057,
+              42.0731254
+            ],
+            [
+              -93.6601256,
+              42.0731268
+            ],
+            [
+              -93.6602319,
+              42.0732251
+            ],
+            [
+              -93.6602471,
+              42.0732391
+            ],
+            [
+              -93.6602684,
+              42.0732266
+            ],
+            [
+              -93.6603223,
+              42.073273
+            ],
+            [
+              -93.6602801,
+              42.0732993
+            ],
+            [
+              -93.6603089,
+              42.0733247
+            ],
+            [
+              -93.6603417,
+              42.0733537
+            ],
+            [
+              -93.660284,
+              42.0733877
+            ],
+            [
+              -93.6603144,
+              42.0734113
+            ],
+            [
+              -93.6603514,
+              42.0734399
+            ],
+            [
+              -93.6603751,
+              42.0734267
+            ],
+            [
+              -93.660505,
+              42.0735479
+            ],
+            [
+              -93.6605414,
+              42.0735819
+            ],
+            [
+              -93.6606065,
+              42.0736858
+            ],
+            [
+              -93.6610818,
+              42.0735221
+            ],
+            [
+              -93.6610758,
+              42.0735122
+            ],
+            [
+              -93.6611785,
+              42.0734747
+            ],
+            [
+              -93.6611504,
+              42.0734312
+            ],
+            [
+              -93.6611816,
+              42.0734213
+            ],
+            [
+              -93.6610193,
+              42.073176
+            ],
+            [
+              -93.6611434,
+              42.0731462
+            ],
+            [
+              -93.6611358,
+              42.0729866
+            ]
+          ]
+        ]
+      },
+      "id": "way/157009629"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/199667657",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "name": "Cornerstone Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.5662482,
+              42.0089966
+            ],
+            [
+              -93.5660563,
+              42.0091362
+            ],
+            [
+              -93.566101,
+              42.0091643
+            ],
+            [
+              -93.5659773,
+              42.0092511
+            ],
+            [
+              -93.5660254,
+              42.0092843
+            ],
+            [
+              -93.5659945,
+              42.0093047
+            ],
+            [
+              -93.5661354,
+              42.0094336
+            ],
+            [
+              -93.5661612,
+              42.0094145
+            ],
+            [
+              -93.5663089,
+              42.0095281
+            ],
+            [
+              -93.5662763,
+              42.0095511
+            ],
+            [
+              -93.5663244,
+              42.0095868
+            ],
+            [
+              -93.566302,
+              42.0096009
+            ],
+            [
+              -93.5663519,
+              42.0096353
+            ],
+            [
+              -93.5662144,
+              42.0097273
+            ],
+            [
+              -93.566144,
+              42.0096698
+            ],
+            [
+              -93.566022,
+              42.0097541
+            ],
+            [
+              -93.5662097,
+              42.0098886
+            ],
+            [
+              -93.5660541,
+              42.0100058
+            ],
+            [
+              -93.5660935,
+              42.0100434
+            ],
+            [
+              -93.5659472,
+              42.0101303
+            ],
+            [
+              -93.565986,
+              42.0101721
+            ],
+            [
+              -93.5656576,
+              42.0103848
+            ],
+            [
+              -93.5656075,
+              42.0103406
+            ],
+            [
+              -93.5655256,
+              42.0103963
+            ],
+            [
+              -93.5654798,
+              42.0103983
+            ],
+            [
+              -93.5654735,
+              42.0104989
+            ],
+            [
+              -93.5655168,
+              42.0104983
+            ],
+            [
+              -93.5657261,
+              42.0106586
+            ],
+            [
+              -93.5660201,
+              42.0104457
+            ],
+            [
+              -93.5659513,
+              42.01039
+            ],
+            [
+              -93.5659841,
+              42.0103839
+            ],
+            [
+              -93.566168,
+              42.0104371
+            ],
+            [
+              -93.5662161,
+              42.0105571
+            ],
+            [
+              -93.5666216,
+              42.0104779
+            ],
+            [
+              -93.5665769,
+              42.0103605
+            ],
+            [
+              -93.5667831,
+              42.01022
+            ],
+            [
+              -93.5666285,
+              42.0101077
+            ],
+            [
+              -93.5667385,
+              42.0099928
+            ],
+            [
+              -93.5667831,
+              42.0099085
+            ],
+            [
+              -93.5668072,
+              42.0098192
+            ],
+            [
+              -93.5668828,
+              42.0097809
+            ],
+            [
+              -93.5669274,
+              42.0098166
+            ],
+            [
+              -93.5670477,
+              42.0097324
+            ],
+            [
+              -93.5670855,
+              42.009763
+            ],
+            [
+              -93.567302,
+              42.0096047
+            ],
+            [
+              -93.5669034,
+              42.0092728
+            ],
+            [
+              -93.5667762,
+              42.0093596
+            ],
+            [
+              -93.566711,
+              42.0093136
+            ],
+            [
+              -93.5664292,
+              42.0095026
+            ],
+            [
+              -93.5663467,
+              42.0094311
+            ],
+            [
+              -93.5664086,
+              42.00938
+            ],
+            [
+              -93.5663089,
+              42.009306
+            ],
+            [
+              -93.5664876,
+              42.0091706
+            ],
+            [
+              -93.5664541,
+              42.0091476
+            ],
+            [
+              -93.5665173,
+              42.0091024
+            ],
+            [
+              -93.5663788,
+              42.0090031
+            ],
+            [
+              -93.5663083,
+              42.0090455
+            ],
+            [
+              -93.5662482,
+              42.0089966
+            ]
+          ]
+        ]
+      },
+      "id": "way/199667657"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/241726009",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "lutheran",
+        "name": "University Lutheran Congregational Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6434198,
+              42.0208967
+            ],
+            [
+              -93.6432795,
+              42.0209174
+            ],
+            [
+              -93.6430868,
+              42.0210502
+            ],
+            [
+              -93.6431704,
+              42.0211173
+            ],
+            [
+              -93.6431185,
+              42.0211531
+            ],
+            [
+              -93.6431504,
+              42.0211656
+            ],
+            [
+              -93.6431029,
+              42.0211877
+            ],
+            [
+              -93.6431089,
+              42.0213101
+            ],
+            [
+              -93.6432647,
+              42.0213714
+            ],
+            [
+              -93.6434039,
+              42.0213066
+            ],
+            [
+              -93.6433977,
+              42.0211798
+            ],
+            [
+              -93.6433133,
+              42.0211466
+            ],
+            [
+              -93.6433114,
+              42.0211084
+            ],
+            [
+              -93.6433093,
+              42.021066
+            ],
+            [
+              -93.6433459,
+              42.0210368
+            ],
+            [
+              -93.643374,
+              42.0210304
+            ],
+            [
+              -93.6434664,
+              42.0210093
+            ],
+            [
+              -93.6434198,
+              42.0208967
+            ]
+          ]
+        ]
+      },
+      "id": "way/241726009"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/259063602",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "baptist",
+        "name": "Grand Avenue Baptist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6198202,
+              42.045511
+            ],
+            [
+              -93.6198166,
+              42.0452808
+            ],
+            [
+              -93.6197881,
+              42.0452808
+            ],
+            [
+              -93.6197893,
+              42.045234
+            ],
+            [
+              -93.6198166,
+              42.045234
+            ],
+            [
+              -93.6198166,
+              42.0450056
+            ],
+            [
+              -93.6195981,
+              42.0450065
+            ],
+            [
+              -93.6196005,
+              42.045234
+            ],
+            [
+              -93.6196302,
+              42.045234
+            ],
+            [
+              -93.6196314,
+              42.045279
+            ],
+            [
+              -93.6196052,
+              42.0452799
+            ],
+            [
+              -93.6196159,
+              42.0455119
+            ],
+            [
+              -93.6198202,
+              42.045511
+            ]
+          ]
+        ]
+      },
+      "id": "way/259063602"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/260004449",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "name": "Stonebrook Community Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6388708,
+              42.0575444
+            ],
+            [
+              -93.638894,
+              42.0575271
+            ],
+            [
+              -93.6389521,
+              42.0575625
+            ],
+            [
+              -93.6390781,
+              42.0574659
+            ],
+            [
+              -93.6390374,
+              42.0574296
+            ],
+            [
+              -93.6391879,
+              42.057321
+            ],
+            [
+              -93.6391237,
+              42.0572749
+            ],
+            [
+              -93.6389439,
+              42.0571459
+            ],
+            [
+              -93.6389358,
+              42.0570795
+            ],
+            [
+              -93.6388089,
+              42.0570809
+            ],
+            [
+              -93.6386594,
+              42.0570825
+            ],
+            [
+              -93.6386594,
+              42.0571429
+            ],
+            [
+              -93.638513,
+              42.0572697
+            ],
+            [
+              -93.6388708,
+              42.0575444
+            ]
+          ]
+        ]
+      },
+      "id": "way/260004449"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/261144011",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "evangelical",
+        "name": "Chinese Evangelical Free Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6841655,
+              42.023333
+            ],
+            [
+              -93.6841623,
+              42.0231647
+            ],
+            [
+              -93.684052,
+              42.0231658
+            ],
+            [
+              -93.6840537,
+              42.0232549
+            ],
+            [
+              -93.6838991,
+              42.0232565
+            ],
+            [
+              -93.683904,
+              42.0235145
+            ],
+            [
+              -93.6840808,
+              42.0235126
+            ],
+            [
+              -93.6840774,
+              42.0233339
+            ],
+            [
+              -93.6841655,
+              42.023333
+            ]
+          ]
+        ]
+      },
+      "id": "way/261144011"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/265650772",
+        "addr:city": "AAmes",
+        "addr:housenumber": "919",
+        "addr:postcode": "50010",
+        "addr:state": "IA",
+        "addr:street": "30th Street",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "nondenominational",
+        "ele": "293",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999286",
+        "gnis:state_id": "19",
+        "name": "North Grand Christian Church",
+        "phone": "515-232-1060",
+        "religion": "christian",
+        "website": "http://ngccames.org/"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6238423,
+              42.0516391
+            ],
+            [
+              -93.6237916,
+              42.0516517
+            ],
+            [
+              -93.6237491,
+              42.0516758
+            ],
+            [
+              -93.6237194,
+              42.0517088
+            ],
+            [
+              -93.6237058,
+              42.0517472
+            ],
+            [
+              -93.6237097,
+              42.0517868
+            ],
+            [
+              -93.6237307,
+              42.0518233
+            ],
+            [
+              -93.6237666,
+              42.0518528
+            ],
+            [
+              -93.6238134,
+              42.051872
+            ],
+            [
+              -93.623866,
+              42.0518789
+            ],
+            [
+              -93.6239189,
+              42.0518728
+            ],
+            [
+              -93.6239661,
+              42.0518542
+            ],
+            [
+              -93.6240027,
+              42.0518252
+            ],
+            [
+              -93.6240247,
+              42.051789
+            ],
+            [
+              -93.6240296,
+              42.0517495
+            ],
+            [
+              -93.6240169,
+              42.0517109
+            ],
+            [
+              -93.6239881,
+              42.0516774
+            ],
+            [
+              -93.6239462,
+              42.0516528
+            ],
+            [
+              -93.6238958,
+              42.0516395
+            ],
+            [
+              -93.6238423,
+              42.0516391
+            ]
+          ]
+        ]
+      },
+      "id": "way/265650772"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/528465180",
+        "addr:city": "Ames",
+        "addr:housenumber": "3333",
+        "addr:postcode": "50010",
+        "addr:state": "IA",
+        "addr:street": "Stange Road",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "baptist",
+        "name": "Heartland Baptist Church",
+        "religion": "christian",
+        "service_times": "Su 08:30,11:00,18:00"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6469234,
+              42.0559923
+            ],
+            [
+              -93.6469228,
+              42.0559155
+            ],
+            [
+              -93.6471316,
+              42.0559145
+            ],
+            [
+              -93.6471298,
+              42.0557092
+            ],
+            [
+              -93.6469037,
+              42.0557103
+            ],
+            [
+              -93.6469019,
+              42.0555039
+            ],
+            [
+              -93.6467425,
+              42.0555047
+            ],
+            [
+              -93.6466275,
+              42.0555052
+            ],
+            [
+              -93.6466293,
+              42.0557009
+            ],
+            [
+              -93.6463826,
+              42.0557021
+            ],
+            [
+              -93.6463846,
+              42.0559191
+            ],
+            [
+              -93.6466054,
+              42.055918
+            ],
+            [
+              -93.6466061,
+              42.0559939
+            ],
+            [
+              -93.6469234,
+              42.0559923
+            ]
+          ]
+        ]
+      },
+      "id": "way/528465180"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/652095881",
+        "addr:city": "Ames",
+        "addr:housenumber": "1212",
+        "addr:postcode": "50014",
+        "addr:state": "IA",
+        "addr:street": "Iowa Avenue",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "name": "Darul Arqum Islamic Centre",
+        "phone": "(515) 292-3683",
+        "religion": "muslim",
+        "service_times": "24/7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6586221,
+              42.0339872
+            ],
+            [
+              -93.6586887,
+              42.0339373
+            ],
+            [
+              -93.6585834,
+              42.0338597
+            ],
+            [
+              -93.6585827,
+              42.0337349
+            ],
+            [
+              -93.6585416,
+              42.0337351
+            ],
+            [
+              -93.6585414,
+              42.0337026
+            ],
+            [
+              -93.6584,
+              42.033703
+            ],
+            [
+              -93.6584002,
+              42.033735
+            ],
+            [
+              -93.6583663,
+              42.0337351
+            ],
+            [
+              -93.6583668,
+              42.033831
+            ],
+            [
+              -93.6584289,
+              42.0338767
+            ],
+            [
+              -93.6583635,
+              42.0339256
+            ],
+            [
+              -93.6584884,
+              42.0340177
+            ],
+            [
+              -93.6585752,
+              42.0339527
+            ],
+            [
+              -93.6586221,
+              42.0339872
+            ]
+          ]
+        ]
+      },
+      "id": "way/652095881"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/853984696",
+        "addr:city": "Ames",
+        "addr:housenumber": "611",
+        "addr:postcode": "50010",
+        "addr:state": "IA",
+        "addr:street": "Clark Avenue",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "name": "First Christian Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6176423,
+              42.0273513
+            ],
+            [
+              -93.6176381,
+              42.0272
+            ],
+            [
+              -93.6177015,
+              42.027199
+            ],
+            [
+              -93.6176997,
+              42.0271353
+            ],
+            [
+              -93.6176338,
+              42.0271363
+            ],
+            [
+              -93.6176311,
+              42.0270388
+            ],
+            [
+              -93.6176434,
+              42.0270386
+            ],
+            [
+              -93.6176414,
+              42.0269685
+            ],
+            [
+              -93.6174278,
+              42.0269717
+            ],
+            [
+              -93.6174296,
+              42.0270363
+            ],
+            [
+              -93.6174083,
+              42.0270367
+            ],
+            [
+              -93.6174111,
+              42.0271362
+            ],
+            [
+              -93.6171226,
+              42.0271405
+            ],
+            [
+              -93.6171259,
+              42.0272606
+            ],
+            [
+              -93.6174214,
+              42.0272561
+            ],
+            [
+              -93.6174224,
+              42.0272926
+            ],
+            [
+              -93.6174763,
+              42.0272918
+            ],
+            [
+              -93.617478,
+              42.0273538
+            ],
+            [
+              -93.6176423,
+              42.0273513
+            ]
+          ]
+        ]
+      },
+      "id": "way/853984696"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/884647313",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "lutheran",
+        "name": "Bethany Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6026411,
+              41.9946739
+            ],
+            [
+              -93.6027824,
+              41.9945699
+            ],
+            [
+              -93.6026434,
+              41.9944656
+            ],
+            [
+              -93.6025476,
+              41.9945361
+            ],
+            [
+              -93.6025249,
+              41.9945356
+            ],
+            [
+              -93.6025252,
+              41.9945276
+            ],
+            [
+              -93.6024754,
+              41.9945266
+            ],
+            [
+              -93.6024723,
+              41.9946101
+            ],
+            [
+              -93.6025259,
+              41.9946112
+            ],
+            [
+              -93.6025262,
+              41.9946025
+            ],
+            [
+              -93.6025465,
+              41.9946029
+            ],
+            [
+              -93.6026411,
+              41.9946739
+            ]
+          ]
+        ]
+      },
+      "id": "way/884647313"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/981902258",
+        "amenity": "place_of_worship",
+        "building": "yes",
+        "denomination": "baptist",
+        "name": "Campus Baptist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.5620247,
+              42.0095399
+            ],
+            [
+              -93.5620165,
+              42.009493
+            ],
+            [
+              -93.5619056,
+              42.0094991
+            ],
+            [
+              -93.5617982,
+              42.0095138
+            ],
+            [
+              -93.5617025,
+              42.0095442
+            ],
+            [
+              -93.5616126,
+              42.009578
+            ],
+            [
+              -93.5616382,
+              42.0096205
+            ],
+            [
+              -93.5615087,
+              42.0096509
+            ],
+            [
+              -93.5615915,
+              42.0098582
+            ],
+            [
+              -93.5616511,
+              42.009853
+            ],
+            [
+              -93.5616674,
+              42.0098999
+            ],
+            [
+              -93.5617153,
+              42.0098903
+            ],
+            [
+              -93.5618449,
+              42.0102139
+            ],
+            [
+              -93.5622769,
+              42.0101185
+            ],
+            [
+              -93.5621484,
+              42.0097932
+            ],
+            [
+              -93.5622021,
+              42.0097793
+            ],
+            [
+              -93.5621765,
+              42.0097151
+            ],
+            [
+              -93.5622278,
+              42.0096969
+            ],
+            [
+              -93.5621554,
+              42.0095086
+            ],
+            [
+              -93.5620247,
+              42.0095399
+            ]
+          ]
+        ]
+      },
+      "id": "way/981902258"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380103",
+        "amenity": "place_of_worship",
+        "ele": "287",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999266",
+        "gnis:state_id": "19",
+        "name": "Ames Mennonite Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6174096,
+          42.0203685
+        ]
+      },
+      "id": "node/354380103"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380174",
+        "amenity": "place_of_worship",
+        "denomination": "jehovahs_witness",
+        "ele": "286",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999294",
+        "gnis:state_id": "19",
+        "name": "Kingdom Hall of Jehovahs Witnesses",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6243706,
+          42.0568905
+        ]
+      },
+      "id": "node/354380174"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380179",
+        "amenity": "place_of_worship",
+        "ele": "293",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999293",
+        "gnis:state_id": "19",
+        "name": "Ames Four Square Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6101573,
+          42.0271909
+        ]
+      },
+      "id": "node/354380179"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380185",
+        "amenity": "place_of_worship",
+        "ele": "282",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999288",
+        "gnis:state_id": "19",
+        "name": "United Church of Christ",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6135511,
+          42.0272083
+        ]
+      },
+      "id": "node/354380185"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380189",
+        "amenity": "place_of_worship",
+        "ele": "292",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999295",
+        "gnis:state_id": "19",
+        "name": "Ames Jewish Congregation",
+        "religion": "jewish"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6255278,
+          42.0583267
+        ]
+      },
+      "id": "node/354380189"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380202",
+        "amenity": "place_of_worship",
+        "denomination": "methodist",
+        "ele": "281",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999300",
+        "gnis:state_id": "19",
+        "name": "First United Methodist Church",
+        "religion": "christian",
+        "website": "http://fumcames.org/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.613386,
+          42.0266427
+        ]
+      },
+      "id": "node/354380202"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380207",
+        "amenity": "place_of_worship",
+        "ele": "281",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999291",
+        "gnis:state_id": "19",
+        "name": "Unity Church of Ames",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.613552,
+          42.0299385
+        ]
+      },
+      "id": "node/354380207"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380224",
+        "amenity": "place_of_worship",
+        "ele": "278",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999302",
+        "gnis:state_id": "19",
+        "name": "Ames Church of the Nazarene",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6139029,
+          42.0214124
+        ]
+      },
+      "id": "node/354380224"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380231",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "ele": "281",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999301",
+        "gnis:state_id": "19",
+        "name": "Ascension Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.614136,
+          42.0277213
+        ]
+      },
+      "id": "node/354380231"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380239",
+        "amenity": "place_of_worship",
+        "ele": "288",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999303",
+        "gnis:state_id": "19",
+        "name": "Ames Seventh Day Adventist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6208282,
+          42.0347298
+        ]
+      },
+      "id": "node/354380239"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380245",
+        "amenity": "place_of_worship",
+        "ele": "289",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999298",
+        "gnis:state_id": "19",
+        "name": "Ames Community Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6110361,
+          42.0368858
+        ]
+      },
+      "id": "node/354380245"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380400",
+        "amenity": "place_of_worship",
+        "denomination": "methodist",
+        "ele": "287",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999262",
+        "gnis:state_id": "19",
+        "name": "Korean United Methodist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6217382,
+          42.0803097
+        ]
+      },
+      "id": "node/354380400"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380460",
+        "amenity": "place_of_worship",
+        "denomination": "baptist",
+        "name": "First Baptist Church of Ames",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6458351,
+          42.02079
+        ]
+      },
+      "id": "node/354380460"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380468",
+        "amenity": "place_of_worship",
+        "denomination": "catholic",
+        "ele": "281",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999270",
+        "gnis:state_id": "19",
+        "name": "Saint Thomas Aquinas Catholic Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.645145,
+          42.0224336
+        ]
+      },
+      "id": "node/354380468"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380500",
+        "amenity": "place_of_worship",
+        "ele": "303",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999316",
+        "gnis:state_id": "19",
+        "name": "Oakwood Road Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6482249,
+          41.9969059
+        ]
+      },
+      "id": "node/354380500"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380519",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "ele": "293",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999312",
+        "gnis:state_id": "19",
+        "name": "Bethesda Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6264247,
+          42.0374528
+        ]
+      },
+      "id": "node/354380519"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380524",
+        "addr:city": "Ames",
+        "addr:housenumber": "1015",
+        "addr:postcode": "50014",
+        "addr:street": "North Hyland Avenue",
+        "amenity": "place_of_worship",
+        "name": "Unitarian Universalist Fellowship of Ames",
+        "phone": "515-292-5960",
+        "religion": "unitarian_universalist",
+        "website": "http://www.uufames.org/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6561131,
+          42.0316318
+        ]
+      },
+      "id": "node/354380524"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380538",
+        "amenity": "place_of_worship",
+        "ele": "290",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999308",
+        "gnis:state_id": "19",
+        "name": "Saint Cecilia Catholic Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6293849,
+          42.0497078
+        ]
+      },
+      "id": "node/354380538"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380551",
+        "amenity": "place_of_worship",
+        "denomination": "baptist",
+        "ele": "302",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999311",
+        "gnis:state_id": "19",
+        "name": "Friendship Baptist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6524446,
+          42.0114678
+        ]
+      },
+      "id": "node/354380551"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380556",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "ele": "288",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999304",
+        "gnis:state_id": "19",
+        "name": "Saint Paul Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6191068,
+          42.0366526
+        ]
+      },
+      "id": "node/354380556"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380659",
+        "amenity": "place_of_worship",
+        "denomination": "methodist",
+        "ele": "293",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999283",
+        "gnis:state_id": "19",
+        "name": "Calvary United Methodist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6296862,
+          42.0461987
+        ]
+      },
+      "id": "node/354380659"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380669",
+        "amenity": "place_of_worship",
+        "denomination": "methodist",
+        "ele": "290",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999281",
+        "gnis:state_id": "19",
+        "name": "Collegiate United Methodist Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6525577,
+          42.0223379
+        ]
+      },
+      "id": "node/354380669"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380679",
+        "amenity": "place_of_worship",
+        "denomination": "presbyterian",
+        "ele": "290",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999287",
+        "gnis:state_id": "19",
+        "name": "Northminster Presbyterian Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6302183,
+          42.0416524
+        ]
+      },
+      "id": "node/354380679"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380693",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "ele": "300",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999274",
+        "gnis:state_id": "19",
+        "name": "Saint Andrews Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.663553,
+          42.02443
+        ]
+      },
+      "id": "node/354380693"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380697",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "name": "Memorial Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6460229,
+          42.0223827
+        ]
+      },
+      "id": "node/354380697"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380707",
+        "amenity": "place_of_worship",
+        "denomination": "mormon",
+        "ele": "300",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999273;1999272",
+        "gnis:state_id": "19",
+        "name": "Community of Christ Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6613307,
+          42.0230413
+        ]
+      },
+      "id": "node/354380707"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380711",
+        "amenity": "place_of_worship",
+        "ele": "304",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999278",
+        "gnis:state_id": "19",
+        "name": "Trinity Christian Reformed Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6679975,
+          42.0330411
+        ]
+      },
+      "id": "node/354380711"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380717",
+        "amenity": "place_of_worship",
+        "ele": "304",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999279",
+        "gnis:state_id": "19",
+        "name": "Korean Christian Reformed Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6680332,
+          42.0332041
+        ]
+      },
+      "id": "node/354380717"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380720",
+        "amenity": "place_of_worship",
+        "ele": "287",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999276",
+        "gnis:state_id": "19",
+        "name": "Saint Johns by the Campus Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6481392,
+          42.0224129
+        ]
+      },
+      "id": "node/354380720"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/354380751",
+        "amenity": "place_of_worship",
+        "denomination": "mormon",
+        "ele": "293",
+        "gnis:county_id": "169",
+        "gnis:created": "09/26/2003",
+        "gnis:feature_id": "1999307",
+        "gnis:state_id": "19",
+        "name": "The Church of Jesus Christ of Latter-day Saints",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6295134,
+          42.0472603
+        ]
+      },
+      "id": "node/354380751"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2510971242",
+        "amenity": "place_of_worship",
+        "denomination": "lutheran",
+        "name": "Ascension Lutheran Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.640929,
+          42.0555808
+        ]
+      },
+      "id": "node/2510971242"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2642194636",
+        "amenity": "place_of_worship",
+        "name": "Lifepointe Church",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6159301,
+          42.0348546
+        ]
+      },
+      "id": "node/2642194636"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2645905131",
+        "amenity": "place_of_worship",
+        "name": "First Church of Christ Scientist",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6114685,
+          42.0271882
+        ]
+      },
+      "id": "node/2645905131"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5135540628",
+        "addr:city": "Ames",
+        "addr:housenumber": "3333",
+        "addr:postcode": "50010",
+        "addr:state": "IA",
+        "addr:street": "Stange Road",
+        "amenity": "place_of_worship",
+        "denomination": "baptist",
+        "name": "Heartland Baptist Church",
+        "religion": "christian",
+        "service_times": "Su 08:30,11:00,18:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6467569,
+          42.0554624
+        ]
+      },
+      "id": "node/5135540628"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7417185161",
+        "addr:housenumber": "107",
+        "addr:postcode": "50014",
+        "addr:street": "Abraham Drive",
+        "amenity": "place_of_worship",
+        "name": "Westside Church of Christ",
+        "religion": "christian"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6766219,
+          42.0215804
+        ]
+      },
+      "id": "node/7417185161"
+    }
+  ]
+}
