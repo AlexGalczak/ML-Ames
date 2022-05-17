@@ -11,12 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 devtools::install_github("hrbrmstr/overpass")
+remotes::install_github('ropensci/osmdata')
 ```
 ```{r}
 library(tidyverse)
 library(osmdata)
 library(sf)
-library(overpass)
+# library(overpass)
 library(sp)
 library(ggmap)
 ```
@@ -24,10 +25,12 @@ library(ggmap)
 ```{r}
 # https://wiki.openstreetmap.org/wiki/Map_Features
 
+bb <- getbb("Ames, Iowa")
+
 road_primary <- 
   getbb("Ames, Iowa") %>%
   opq() %>%
-  add_osm_feature("highway", "primary") %>%
+  add_osm_feature(key = "highway", value = "primary") %>%
   osmdata_sf()
 
 road_secondary <- 
@@ -42,6 +45,18 @@ city <-
   add_osm_feature("place", "city") %>%
   osmdata_sf()
 
+water <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("natural", "water") %>%
+  osmdata_sf()
+
+uni <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("name", "Iowa State University") %>%
+  osmdata_sf()
+
 religion <- 
   getbb("Ames, Iowa") %>%
   opq() %>%
@@ -54,9 +69,22 @@ park <-
   add_osm_feature("leisure", "park") %>%
   osmdata_sf()
 
-ames_map <- get_stamenmap(getbb("Ames, Iowa"), zoom = 12, maptype = "toner-lite")
+save(road_primary, road_secondary, city, water, park, uni, religion,
+     file = "ames_mapdata.RData")
 
-ggplot()+
+
+```
+
+
+
+```{r}
+# ames_map <- get_stamenmap(getbb("Ames, Iowa"), zoom = 12, maptype = "toner-lite")
+
+load("ames_mapdata.RData")
+
+
+# p <- 
+  ggplot()+
   geom_sf(data = city$osm_multipolygons,
           color = "#ffffff",
           fill = "#e6e6e6",
@@ -65,6 +93,16 @@ ggplot()+
           color = "#ffffff",
           fill = "#acc388",
           size = 0,
+          alpha = 1) +
+  geom_sf(data = water$osm_multipolygons,
+          color = "#B2E3EA",
+          fill = "#B2E3EA",
+          size = 0.5,
+          alpha = 1) +
+  geom_sf(data = uni$osm_multipolygons,
+          color = "#EAD7AF",
+          fill = "#EAD7AF",
+          size = 0.5,
           alpha = 1) +
   geom_sf(data = road_primary$osm_lines,
           color = "#ebba76",
@@ -75,9 +113,9 @@ ggplot()+
           alpha = 1,
           size = 0.5) +
   geom_sf(data = religion$osm_points,
-          color = "#ed1212",
+          color = "#EA80B6",
           shape=3,
-          alpha = 1) +
+          alpha = 0.75) +
   xlim(-93.7,-93.52)+
   ylim(41.98,42.08)+
   theme(axis.line=element_blank(),
@@ -90,6 +128,9 @@ ggplot()+
         panel.border=element_blank(),
         panel.grid.major=element_blank(),
         panel.grid.minor=element_blank())
+
+
+ggsave("ames.svg",plot = p, height=9, width=12,dpi=300)
 
 ```
 
