@@ -1,0 +1,96 @@
+---
+title: "ames_map"
+author: "Chad Loh"
+date: '2022-05-17'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+devtools::install_github("hrbrmstr/overpass")
+```
+```{r}
+library(tidyverse)
+library(osmdata)
+library(sf)
+library(overpass)
+library(sp)
+library(ggmap)
+```
+
+```{r}
+# https://wiki.openstreetmap.org/wiki/Map_Features
+
+road_primary <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("highway", "primary") %>%
+  osmdata_sf()
+
+road_secondary <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("highway", "secondary") %>%
+  osmdata_sf()
+
+city <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("place", "city") %>%
+  osmdata_sf()
+
+religion <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("amenity", "place_of_worship") %>%
+  osmdata_sf()
+
+park <- 
+  getbb("Ames, Iowa") %>%
+  opq() %>%
+  add_osm_feature("leisure", "park") %>%
+  osmdata_sf()
+
+ames_map <- get_stamenmap(getbb("Ames, Iowa"), zoom = 12, maptype = "toner-lite")
+
+ggplot()+
+  geom_sf(data = city$osm_multipolygons,
+          color = "#ffffff",
+          fill = "#e6e6e6",
+          alpha = 1) +
+  geom_sf(data = park$osm_polygons,
+          color = "#ffffff",
+          fill = "#acc388",
+          size = 0,
+          alpha = 1) +
+  geom_sf(data = road_primary$osm_lines,
+          color = "#ebba76",
+          alpha = 1,
+          size = 1)+
+  geom_sf(data = road_secondary$osm_lines,
+          color = "#ebba76",
+          alpha = 1,
+          size = 0.5) +
+  geom_sf(data = religion$osm_points,
+          color = "#ed1212",
+          shape=3,
+          alpha = 1) +
+  xlim(-93.7,-93.52)+
+  ylim(41.98,42.08)+
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_rect(fill='transparent'),
+        panel.border=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank())
+
+```
+
+
