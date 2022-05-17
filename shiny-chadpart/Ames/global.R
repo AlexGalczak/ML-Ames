@@ -7,4 +7,6 @@ library(ggmap)
 
 
 load("ames_mapdata.RData")
-# write.csv(nbhd,"data/Ames_HousePrice_nbhd.csv")
+df <- as.data.frame(read.csv("Ames_HousePrice_df.csv"))
+nbhd <- as.data.frame(read.csv("Ames_HousePrice_nbhd.csv"))
+

@@ -8,7 +8,6 @@
 #
 
 library(shiny)
-load("ames_mapdata.RData")
 
 # Define server logic required to draw a histogram
 shinyServer(
@@ -44,12 +43,14 @@ shinyServer(
                 color = "#ebba76",
                 alpha = 1,
                 size = 0.5) +
+        geom_point(data = df %>% filter(Neighborhood == input$hood), aes( x = Longitude, y = Latitude, color = SalePrice), alpha = 0.5, size=1)+
         # geom_sf(data = religion$osm_points,
         #         color = "#EA80B6",
         #         shape=3,
         #         alpha = 0.75) +
         xlim(-93.7,-93.52)+
         ylim(41.98,42.08)+
+        scale_color_gradientn(limits = c(0,350000),colours=c("navyblue", "darkmagenta", "darkorange1"))+
         theme(axis.line=element_blank(),
               axis.text.x=element_blank(),
               axis.text.y=element_blank(),
