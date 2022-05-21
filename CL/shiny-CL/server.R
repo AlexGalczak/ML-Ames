@@ -47,10 +47,10 @@ shinyServer(
                   alpha = 1,
                   size = 0.5) +
           geom_point(data = df, 
-                     aes( x = Longitude, y = Latitude, color = SalePrice), 
+                     aes( x = Longitude, y = Latitude, color = Neighborhood), 
                      alpha = 0.05, size=0.1) +
           geom_point(data = df %>% filter(Neighborhood == input$hood), 
-                     aes( x = Longitude, y = Latitude, color = SalePrice), 
+                     aes( x = Longitude, y = Latitude, color = Neighborhood), 
                      alpha = 1, size=0.1)+
           geom_text_repel(data = nbhd, aes(x = Longitude, y = Latitude, label=Name), size = 1.5, color = "#333333")+
           # geom_text_interactive(data = nbhd, 
@@ -62,7 +62,7 @@ shinyServer(
           #         alpha = 0.75) +
           xlim(-93.7,-93.52) +
           ylim(41.98,42.08) +
-          scale_color_gradientn(limits = c(0,350000),colours=c("navyblue", "darkmagenta", "darkorange1")) +
+          # scale_color_gradientn(limits = c(0,350000),colours=c("navyblue", "darkmagenta", "darkorange1")) +
           theme(axis.line=element_blank(),
                 axis.text.x=element_blank(),
                 axis.text.y=element_blank(),
