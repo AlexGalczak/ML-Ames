@@ -2079,50 +2079,6 @@
         ]
       },
       "id": "relation/128947"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "@id": "node/151883827",
-        "@relations": [
-          {
-            "role": "admin_centre",
-            "rel": 128947,
-            "reltags": {
-              "admin_level": "8",
-              "border_type": "city",
-              "boundary": "administrative",
-              "name": "Ames",
-              "place": "city",
-              "source": "TIGER/Line® 2008 Place Shapefiles (http://www.census.gov/geo/www/tiger/)",
-              "tiger:CLASSFP": "C1",
-              "tiger:CPI": "Y",
-              "tiger:FUNCSTAT": "A",
-              "tiger:LSAD": "25",
-              "tiger:MTFCC": "G4110",
-              "tiger:NAME": "Ames",
-              "tiger:NAMELSAD": "Ames city",
-              "tiger:PCICBSA": "Y",
-              "tiger:PCINECTA": "N",
-              "tiger:PLACEFP": "01855",
-              "tiger:PLACENS": "02393947",
-              "tiger:PLCIDFP": "1901855",
-              "tiger:STATEFP": "19",
-              "type": "boundary",
-              "wikidata": "Q470273",
-              "wikipedia": "en:Ames, Iowa"
-            }
-          }
-        ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -93.6170448,
-          42.0267567
-        ]
-      },
-      "id": "node/151883827"
     }
   ]
 }

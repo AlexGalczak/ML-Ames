@@ -51,12 +51,13 @@ shinyServer(
           
           
           geom_point(data = df %>% filter(Neighborhood %in% input$hood &
-                                            
-                                            
-                                            
                                             SalePrice >= input$price[1] & 
-                                            SalePrice <= input$price[2]), 
-                     aes( x = Longitude, y = Latitude, color = Neighborhood), 
+                                            SalePrice <= input$price[2] & 
+                                            BedroomAbvGr <= input$BedroomAbvGr &
+                                            FullBath <= input$FullBath &
+                                            GrLivArea >= input$GrLivArea[1] &
+                                            GrLivArea <= input$GrLivArea[2]),
+                       aes( x = Longitude, y = Latitude, color = Neighborhood), 
                      alpha = 1, size=0.1)+
           
           # geom_point(data = df %>% filter(SalePrice >= input$price[1] & SalePrice <= input$price[2]), 
@@ -88,7 +89,8 @@ shinyServer(
                 panel.background=element_rect(fill='transparent'),
                 panel.border=element_blank(),
                 panel.grid.major=element_blank(),
-                panel.grid.minor=element_blank())
+                panel.grid.minor=element_blank(),
+                legend.position = "None")
         
         # preselection <- input$hood
         # girafe(ggobj = ggobj,
@@ -100,5 +102,62 @@ shinyServer(
         )
       }
       )
+    
+    
+    output$price_sqft <- renderPlot({
+      df %>% 
+        mutate(TotSF = TotalBsmtSF + GrLivArea) %>% 
+        relocate(TotSF, .after = GrLivArea) %>% 
+        mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
+        relocate(SFPrice, .after = SalePrice) %>%
+        filter(Neighborhood %in% input$hood) %>%
+        ggplot(aes(x=GrLivArea, y=SFPrice, color=SFPrice)) + 
+        geom_point() +
+        theme_ipsum() +
+        theme(
+          legend.position="none") +
+        labs(title = "Square Foot Price by Above Ground Living Area", 
+             x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
+      
+      } )
+    
+    output$price_qual <- renderPlot({
+      df %>% 
+        mutate(TotSF = TotalBsmtSF + GrLivArea) %>% 
+        relocate(TotSF, .after = GrLivArea) %>% 
+        mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
+        relocate(SFPrice, .after = SalePrice) %>%
+        mutate(OverallQual = as.factor(OverallQual)) %>%
+        filter(Neighborhood %in% input$hood) %>%
+        ggplot(aes(x= OverallQual, y=SFPrice)) + 
+        geom_boxplot(color="#5a7fdb", fill="#ebae34", alpha=0.3) + 
+        theme_ipsum() + 
+        labs(title = "Quality by Sq Ft Price", x = "Overall Quality", y = "Price Per Sq")
+      
+    })
+    
+    output$prediction <- renderPlot({
+    
+    df %>% 
+      filter(Neighborhood %in% input$hood) %>%
+      mutate(Neigh = fct_reorder(Neighborhood, SalePrice)) %>% 
+      mutate(SalePriceShort = round(SalePrice/1000),2) %>% 
+
+      ggplot(aes(x=SalePriceShort, group=Neigh, fill=Neigh)) +
+      geom_density(adjust=1.5, alpha=.4) +
+        
+      #ggplot(aes(x = SalePriceShort, y = Neigh, fill = ..x..)) +
+      #geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
+      #scale_fill_viridis(name = "House Price", option = "C") +
+      labs(title = 'House Price Distribution by Neighborhood', x = 'Sale Price (Thousand Dollars)', y = 'Density') +
+      theme_ipsum() +
+      theme(
+        legend.position="none",
+        panel.spacing = unit(0.1, "lines"),
+        strip.text.x = element_text(size = 8)
+      )
+      
+    })
+    
   }
 )
