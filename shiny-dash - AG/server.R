@@ -110,7 +110,7 @@ shinyServer(
         relocate(TotSF, .after = GrLivArea) %>% 
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
-        filter(Neighborhood %in% input$hood) %>%
+        filter(Neighborhood %in% input$hood_analysis) %>%
         ggplot(aes(x=GrLivArea, y=SFPrice, color=SFPrice)) + 
         geom_point() +
         theme_ipsum() +
@@ -128,7 +128,7 @@ shinyServer(
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
         mutate(OverallQual = as.factor(OverallQual)) %>%
-        filter(Neighborhood %in% input$hood) %>%
+        filter(Neighborhood %in% input$hood_analysis) %>%
         ggplot(aes(x= OverallQual, y=SFPrice)) + 
         geom_boxplot(color="#5a7fdb", fill="#ebae34", alpha=0.3) + 
         theme_ipsum() + 

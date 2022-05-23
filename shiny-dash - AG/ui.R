@@ -41,41 +41,137 @@ shinyUI(
         menuItem("EDA", tabName = "Analysis"),
         menuItem("Predictions", tabName= "Predictions"))
     ),
-    
-    
     dashboardBody(
       tabItems(
-        tabItem(tabName = "Map",
-                h2("Map of Ames, IOWA"),
-                
+        tabItem
+        (
+          tabName = "Map",
           fluidRow(
-            box(plotOutput("Amesmap", width = "90%", height = "90%"))),
-                
-          fluidRow( 
-            box(selectInput(input = "hood",
-                                  label = h4("Neighborhood"), 
-                                  choices = hoods,
-                                  selected = "OldTown")),
-                         
-            box(sliderInput(input = "price",
-                                         label = h5("Price"),
-                                         min = 0,
-                                         max = 800000,
-                                         value = c(100000, 180000), sep = "",
-                                         step = 1000,
-                                         round = 4)),
-      tabItems(
-        tabItem(tabName = "Analysis",
-          fluidRow(
-            box(plotOutput("price_sqft")),
-                  
-            box(selectInput(input = "hood",
-                                              label = h4("Neighborhood"), 
-                                              choices = hoods,
-                                              selected = "OldTown"))
-                
-                
-        )))))
+            column(
+              width =3,
+              box
+              (
+                width = 12,
+                selectInput
+                (
+                  "hood",
+                  label = h4("Neighborhood"),
+                  choices = hoods,
+                  selected = "OldTown")
+              ),
+              box
+              (
+                width = 12,
+                sliderInput
+                (
+                  "price",
+                  label = h5("Price"),
+                  min = 0,
+                  max = 800000,
+                  value = c(100000, 180000), 
+                  sep = "",
+                  step = 1000,
+                  round = 4
+                )
+              ),
+              box
+              (
+                width = 12,
+                sliderInput
+                (
+                  "BedroomAbvGr",
+                  label = h5("Number of Bedrooms"),
+                  min = 0,
+                  max = 5,
+                  value = 2
+                )
+              ),
+              box
+              (
+                width = 12,
+                sliderInput
+                (
+                  "FullBath",
+                  label = h5("Number of Bathrooms"),
+                  min = 0,
+                  max = 3,
+                  value = 1)
+              ),
+              box
+              (
+                width = 12,
+                sliderInput
+                (
+                  "GrLivArea",
+                  label = h5("Total Area (sqft)"),
+                  min = 0,
+                  max = 5000,
+                  value = c(500,2000),
+                  step = 200,
+                  round = 2)
+              ),
+              box
+              (
+                width = 12,
+                radioButtons("BldgType",
+                             label = h5("Building Type"),
+                             choiceNames = c("Single Family","2-Family", "Duplex", "Townhouse(Inside)","Townhouse(End)"),
+                             choiceValues = c("1Fam","2fmCon","Duplex","Twnhs","TwnhsE"),
+                             inline = TRUE)
+              )
+            ),
+            column
+            (
+              width = 9,
+              box
+              (
+                girafeOutput("Amesmap", width = "90%", height = "90%"),  width = 12
+              )
+            )
+          )
+        ),
+        tabItem
+        (
+          tabName = "Analysis",
+          fluidRow
+          (
+            column
+            (
+              width = 3,
+              box
+              (
+                width =12,
+                selectInput
+                (
+                  input = "hood_analysis",
+                  label = h4("Neighborhood"), 
+                  choices = hoods,
+                  selected = "OldTown")
+              )
+            ),
+            column(
+              width = 9,
+              box
+              (
+                width = 6,
+                plotOutput("price_sqft")
+              ),
+              box
+              (
+                width = 6,
+                plotOutput("price_qual")
+              ),
+              box
+              (
+                width = 6
+              ),
+              box
+              (
+                width = 6
+              )
+            )
+          )
+        )
       )
     )
   )
