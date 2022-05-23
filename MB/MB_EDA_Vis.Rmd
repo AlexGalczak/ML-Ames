@@ -220,7 +220,11 @@ house_price <- house_price %>%
 house_price <- house_price %>% relocate(Age, .after = YearBuilt)
 
 house_price %>% 
-  ggplot(aes(x=Age, y=SalePrice, color=SalePriceShort)) + geom_point()
+  ggplot(aes(x=Age, y=SalePriceShort, color=SalePriceShort)) + 
+  geom_point() +
+  theme_bw() + 
+  theme_ipsum() +
+  labs(title = 'House Age by Sale Price', x='Age', y='Sale Price (Thousand Dollars)' )
 
 sum(is.na(house_price$Age))
 
@@ -259,24 +263,35 @@ house_price %>%
   facet_grid(~AgeBin) +
   labs(title = "Price by Percent Finished Basement Grouped by House Age", x = "Total Percentage of Basement Finished", y="Sale Price (Thousand Dollars)")
 ```
-```{r  House Built Distribution }
-
+```{r  House Built Distributions (Grouped by Foundation)}
 house_price2 <- read.csv("data/Ames_HousePrice_cleaned.csv")
 
-summary(house_price2)
+house_price %>% 
+  ggplot(aes(x=Age, y=SalePrice, colour = Foundation, alpha=0.6)) +
+  geom_point() +
+  theme_bw() + 
+  theme_ipsum() + 
+  labs(title = 'Year Built by Sale Price Grouped by Foundation', x = 'House Age', y='Sale Price')
+
+# It looks like houses built after 1980 are more desirable/sell higher 
 
 ```
 
+```{r  House Built Distributions (Grouped by Foundation)}
+house_price2 <- read.csv("data/Ames_HousePrice_cleaned.csv")
 
-```{r   Density Plots of Ames & Each Neighborhood}
+house_price %>% 
+  ggplot(aes(x=Age, y=SalePrice, colour = MasVnrType, alpha=0.6)) +
+  geom_point() +
+  theme_bw() + 
+  theme_ipsum() + 
+  labs(title = 'Year Built by Sale Price Grouped by Foundation', x = 'House Age', y='Sale Price')
 
-clean = read.csv('data/Ames_HousePrice_cleaned.csv')
-
-clean
+# It looks like houses built after 1980 are more desirable/sell higher 
 
 ```
 
-```{r  Neighborhood price density vs Rest of Ames}
+```{r  Plots for Shiny Price Toggle Bar: Neighborhood price density vs Rest of Ames}
 
 clean_dummy <- read.csv('data/cleaned_dummies.csv')
 
@@ -294,7 +309,6 @@ clean_dummy %>%
   guides(fill=guide_legend(title='Bluestem'))
 
 ```
-
 
 
 
