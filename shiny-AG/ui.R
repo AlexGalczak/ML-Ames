@@ -28,7 +28,7 @@ library(bslib)
 
 shinyUI(
   fluidPage(
-  theme = bs_theme(version = 4, bootswatch = "minty"),
+  theme = bs_theme(version = 4, bootswatch = "lux"),
   
   # Application title
   titlePanel("Ames Housing Price Prediction"),
@@ -52,10 +52,13 @@ shinyUI(
       
       sliderInput(input = "price",
                   label = h5("Price"),
-                  min = min(df$SalePrice),
-                  max = max(df$SalePrice),
-                  value = c(100000, 120000), sep = "",
+                  min = 0,
+                  max = 800000,
+                  value = c(100000, 180000), sep = "",
+                  step = 1000,
                   round = 4),
+      
+      #plotOutput("prediction"),
       
       sliderInput(input = "BedroomAbvGr",
                     label = h5("Number of Bedrooms"),
@@ -64,7 +67,7 @@ shinyUI(
                   value = 2),
       
       sliderInput(input = "FullBath",
-                  label = h5("# of Bathrooms"),
+                  label = h5("Number of Bathrooms"),
                   min = 0,
                   max = 3,
                   value = 1),
@@ -73,33 +76,44 @@ shinyUI(
                   label = h5("Total Area (sqft)"),
                   min = 0,
                   max = 5000,
-                  value = c(500,1000),
+                  value = c(500,2000),
                   step = 200,
                   round = 2),
       
       #price distribution density output slider underneath the graph for living area
     
-      #year built slider
-      
-      #price prediction input 
-      
       radioButtons(input = "BldgType",
-                     label = h4("Building Type"),
-                     choices = unique(df$BldgType))
+                   label = h5("Building Type"),
+                   choiceNames = c("Single Family","Townhouse End Unit" ,"2-Family", "Duplex", "Townhouse Inside Unit"),
+                   choiceValues = c("1Fam", "TwnhsE","2fmCon","Duplex","Twnhs"),
+                   inline = TRUE),
       
-      #radioButtons("dist", "dist type",
-      #             c("normal"= "norm", "a"="a", "b"="b"))
-      ),
+      width = 3),
     
     # Show a plot of the generated distribution
     mainPanel(
-      girafeOutput("Amesmap", width = "90%", height = "90%"),
       
-    mainPanel(  
-      tabsetPanel(
-        tabPanel("Price Prediction"),
-        tabPanel("EDA"),
-        tabPanel("Additional Info"))
+      titlePanel("AMES, IO"),
+      fluidRow(
+        girafeOutput("Amesmap", width = "90%", height = "90%")),
+      
+      titlePanel("Analysis by Neighborhood"),
+      fluidRow(  
+        tabsetPanel(
+          tabPanel("price/sqft per above ground living area", plotOutput("price_sqft",width ="70%", height = 480)),
+          tabPanel("price/sqft per quality", plotOutput("price_qual", width = "70%", height = 480)),
+          tabPanel("Additional Info")),
+    
+    mainPanel(
+      titlePanel("Price Distribution"),
+      fluidRow(
+        plotOutput("prediction", width = "70%", height = 480)
+      )
+    )
+      
+      
+      
+    
       )
     )
   )
