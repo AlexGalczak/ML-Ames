@@ -29,7 +29,6 @@
 hoods = data.frame(t(nbhd$Neighborhood))
 colnames(hoods) <- nbhd$Name
 library(bslib)
-all = c(hoods)
 
 
 shinyUI(
@@ -57,10 +56,9 @@ shinyUI(
                 (
                   "hood",
                   label = h4("Neighborhood"),
-                  choices = c(all , hoods),            # ifelse(str_detect(place, ", [A-Z][A-Z]$"), hoods),
+                  choices = c('All' , hoods),            # ifelse(str_detect(place, ", [A-Z][A-Z]$"), hoods),
                   multiple = TRUE,
-                  #options = pickerOptions(actionsBox = TRUE),
-                  selected = "OldTown")
+                  selected = "All")
               ),
               box
               (
@@ -148,9 +146,9 @@ shinyUI(
                 (
                   input = "hood_analysis",
                   label = h4("Neighborhood"), 
-                  choices = hoods,
+                  choices = c('All' , hoods), 
                   multiple = TRUE,
-                  selected = "OldTown")
+                  selected = "All")
               )
             ),
             column(

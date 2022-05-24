@@ -50,14 +50,9 @@ shinyServer(
           
           
           
-          geom_point(data = df %>% filter((Neighborhood %in% input$hood) &
+          geom_point(data = df %>% filter((Neighborhood %in% input$hood | input$hood == "All" )&
             
-            
-            #{if(input$hood == 'all') {
-            #df
-          #} else {
-           # df %>% filter(Nighborhood == input$hood)
-          #}}            
+          
                                             
                                             
                                             SalePrice >= input$price[1] & 
@@ -119,7 +114,7 @@ shinyServer(
         relocate(TotSF, .after = GrLivArea) %>% 
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
-        filter(Neighborhood %in% input$hood_analysis) %>%
+        filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All") %>%
         ggplot(aes(x=GrLivArea, y=SFPrice, color=SFPrice)) + 
         geom_point() +
         theme_ipsum() +
@@ -138,7 +133,7 @@ shinyServer(
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
         mutate(OverallQual = as.factor(OverallQual)) %>%
-        filter(Neighborhood %in% input$hood_analysis) %>%
+        filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All")  %>%
         ggplot(aes(x= OverallQual, y=SFPrice)) + 
         geom_boxplot(color="#5a7fdb", fill="#ebae34", alpha=0.3) + 
         theme_ipsum() + 
@@ -149,7 +144,7 @@ shinyServer(
     output$prediction <- renderPlot({
     
     df %>% 
-      filter(Neighborhood %in% input$hood_analysis) %>%
+      filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All")  %>%
       mutate(Neigh = fct_reorder(Neighborhood, SalePrice)) %>% 
       mutate(SalePriceShort = round(SalePrice/1000),2) %>% 
 

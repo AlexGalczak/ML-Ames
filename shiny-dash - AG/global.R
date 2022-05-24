@@ -9,6 +9,7 @@ library(ggmap)
 library(ggrepel)
 library(ggiraph)
 library(shinyWidgets)
+library(fontawesome)
 
 
 library(ggridges)
