@@ -300,16 +300,34 @@ head(clean_dummy)
 
 clean_dummy$nghbr_Blueste <- factor(clean_dummy$nghbr_Blueste)
 clean_dummy %>% 
-  ggplot(aes(x=SalePrice,  fill=nghbr_Blueste, group=nghbr_Blueste)) +
+  mutate(SalePriceShort = round(SalePrice/1000,2)) %>% 
+  ggplot(aes(x=SalePriceShort,  fill=nghbr_Blueste, group=nghbr_Blueste)) +
   geom_density(adjust=1.5, alpha=0.6) +
   scale_fill_viridis(discrete=TRUE) +
   scale_color_viridis(discrete=TRUE) +
   theme_ipsum() +
-  labs(x='SalePrice', y='Density') + 
-  guides(fill=guide_legend(title='Bluestem'))
+  labs(x='SalePrice ($1000 USD)', y='Density', title ='Price Distribution of Neighbourhood') +
+  scale_fill_manual(values=c("#EEB462", "#CD7672"), name = "Legend", labels = c("All Other Neighborhoods", "Bluestem"))
+  # scale_fill_discrete(labels = c("All Other Neighborhoods", "Bluestem")) + 
+  # scale_fill_manual(values=c("#EEB462", "#CD7672")) 
+
+
 
 ```
 
+```{r  House Age and Sq Ft Price }
+
+house_price %>% 
+  ggplot(aes(x=Age, y=SFPrice, color = OverallQual, alpha = 0.9)) + 
+  scale_color_gradient(low="#534666", high="#EEB462") +
+  geom_point() + 
+  geom_smooth(method=lm, color = '#534666') +
+  scale_alpha(guide = "none") + 
+  theme_bw() + 
+  theme_ipsum() + 
+  labs(x = 'House Age', y="Square Foot Price (USD)", title = "Square Foot Price by House Age", color='House Quality') 
+
+```
 
 
 
