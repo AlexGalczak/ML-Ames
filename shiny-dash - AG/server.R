@@ -62,7 +62,7 @@ shinyServer(
                                             GrLivArea >= input$GrLivArea[1] &
                                             GrLivArea <= input$GrLivArea[2]),
                        aes( x = Longitude, y = Latitude, color = Neighborhood), 
-                     alpha = 1, size=0.1)+
+                     alpha = 1, size=0.3)+
           
           # geom_point(data = df %>% filter(SalePrice >= input$price[1] & SalePrice <= input$price[2]), 
           #            aes( x = Longitude, y = Latitude, color = Neighborhood), alpha = 0.5, size=0.1) +

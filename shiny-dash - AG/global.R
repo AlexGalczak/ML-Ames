@@ -10,7 +10,9 @@ library(ggrepel)
 library(ggiraph)
 library(shinyWidgets)
 library(fontawesome)
+library(shinydashboardPlus)
 
+?shinydashboardPlus
 
 library(ggridges)
 library(viridis)
