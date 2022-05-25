@@ -20,29 +20,29 @@ shinyServer(
           geom_sf(data = city$osm_multipolygons,
                   color = "#ffffff",
                   fill = "#e6e6e6",
-                  alpha = 1) +
+                  alpha = 0.5) +
           geom_sf(data = uni$osm_multipolygons,
                   color = "#EAD7AF",
                   fill = "#EAD7AF",
                   size = 0.01,
-                  alpha = 1) +
+                  alpha = 0.5) +
           geom_sf(data = park$osm_polygons,
                   color = "#acc388",
                   fill = "#acc388",
                   size = 0.01,
-                  alpha = 1) +
+                  alpha = 0.5) +
           geom_sf(data = water$osm_multipolygons,
                   color = "#B2E3EA",
                   fill = "#B2E3EA",
                   size = 0.5,
-                  alpha = 1) +
+                  alpha = 0.5) +
           geom_sf(data = road_primary$osm_lines,
                   color = "#ebba76",
-                  alpha = 1,
+                  alpha = 0.8,
                   size = 1)+
           geom_sf(data = road_secondary$osm_lines,
                   color = "#ebba76",
-                  alpha = 1,
+                  alpha = 0.8,
                   size = 0.5) +
           geom_point(data = df, 
                      aes( x = Longitude, y = Latitude, color = Neighborhood), 
@@ -50,7 +50,11 @@ shinyServer(
           
           
           
-          geom_point(data = df %>% filter(Neighborhood %in% input$hood &
+          geom_point(data = df %>% filter((Neighborhood %in% input$hood | input$hood == "All" )&
+            
+          
+                                            
+                                            
                                             SalePrice >= input$price[1] & 
                                             SalePrice <= input$price[2] & 
                                             BedroomAbvGr <= input$BedroomAbvGr &
@@ -110,10 +114,11 @@ shinyServer(
         relocate(TotSF, .after = GrLivArea) %>% 
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
-        filter(Neighborhood %in% input$hood_analysis) %>%
+        filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All") %>%
         ggplot(aes(x=GrLivArea, y=SFPrice, color=SFPrice)) + 
         geom_point() +
         theme_ipsum() +
+        xlim(0,8000) +
         theme(
           legend.position="none") +
         labs(title = "Square Foot Price by Above Ground Living Area", 
@@ -128,7 +133,7 @@ shinyServer(
         mutate(SFPrice = round(SalePrice/TotSF, 2)) %>% 
         relocate(SFPrice, .after = SalePrice) %>%
         mutate(OverallQual = as.factor(OverallQual)) %>%
-        filter(Neighborhood %in% input$hood_analysis) %>%
+        filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All")  %>%
         ggplot(aes(x= OverallQual, y=SFPrice)) + 
         geom_boxplot(color="#5a7fdb", fill="#ebae34", alpha=0.3) + 
         theme_ipsum() + 
@@ -139,7 +144,7 @@ shinyServer(
     output$prediction <- renderPlot({
     
     df %>% 
-      filter(Neighborhood %in% input$hood) %>%
+      filter(Neighborhood %in% input$hood_analysis | input$hood_analysis == "All")  %>%
       mutate(Neigh = fct_reorder(Neighborhood, SalePrice)) %>% 
       mutate(SalePriceShort = round(SalePrice/1000),2) %>% 
 
@@ -150,14 +155,30 @@ shinyServer(
       #geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
       #scale_fill_viridis(name = "House Price", option = "C") +
       labs(title = 'House Price Distribution by Neighborhood', x = 'Sale Price (Thousand Dollars)', y = 'Density') +
+      xlim(0,800) +
       theme_ipsum() +
       theme(
         legend.position="none",
         panel.spacing = unit(0.1, "lines"),
-        strip.text.x = element_text(size = 8)
-      )
+        strip.text.x = element_text(size = 8))
       
     })
+    
+    #clean_dummy$nghbr_Blueste <- factor(clean_dummy$nghbr_Blueste)
+    
+    output$density <- renderPlot({
+    clean_dummy %>% 
+      filter(Neighborhood %in% input$hood) %>%
+      ggplot(aes(x=SalePrice,  fill=nghbr_Blueste, group=nghbr_Blueste)) +
+      geom_density(adjust=1.5, alpha=0.6) +
+      scale_fill_viridis(discrete=TRUE) +
+      scale_color_viridis(discrete=TRUE) +
+      theme_ipsum() +
+      labs(x='SalePrice', y='Density') + 
+      guides(fill=guide_legend(title='Bluestem'))
+      
+    }
+    )
     
   }
 )

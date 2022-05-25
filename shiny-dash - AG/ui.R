@@ -56,8 +56,9 @@ shinyUI(
                 (
                   "hood",
                   label = h4("Neighborhood"),
-                  choices = hoods,
-                  selected = "OldTown")
+                  choices = c('All' , hoods),            # ifelse(str_detect(place, ", [A-Z][A-Z]$"), hoods),
+                  multiple = TRUE,
+                  selected = "All")
               ),
               box
               (
@@ -145,8 +146,9 @@ shinyUI(
                 (
                   input = "hood_analysis",
                   label = h4("Neighborhood"), 
-                  choices = hoods,
-                  selected = "OldTown")
+                  choices = c('All' , hoods), 
+                  multiple = TRUE,
+                  selected = "All")
               )
             ),
             column(
@@ -163,11 +165,13 @@ shinyUI(
               ),
               box
               (
-                width = 6
+                width = 6,
+                plotOutput("density")
               ),
               box
               (
-                width = 6
+                width = 6,
+                plotOutput("prediction")
               )
             )
           )
