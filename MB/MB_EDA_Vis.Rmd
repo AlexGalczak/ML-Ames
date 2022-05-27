@@ -350,6 +350,10 @@ hood_dummy = read.csv('data/hood_dummy.csv')
 hood_dummy$BldgType <- factor(hood_dummy$BldgType)
 hood_dummy$nghbr_Blueste <- factor(hood_dummy$nghbr_Blueste)
 
+levels(hood_dummy$BldgType)
+levels(hood_dummy$BldgType) <- c("1-Fam", "2-Fam Conversion", "Duplex", "Twnhs-Inside", "Twnhs-End")
+
+
 df = hood_dummy %>% 
    group_by(nghbr_Blueste, BldgType) %>% 
    #filter(nghbr_Blueste == 1) %>% 
@@ -358,6 +362,7 @@ df = hood_dummy %>%
 
 
 bldg_levels = df %>% filter(nghbr_Blueste == 0) %>% .$BldgType
+
 df %>% mutate(BldgType=factor(BldgType, bldg_levels)) %>%
 
 # hood_dummy %>% 
@@ -378,15 +383,11 @@ df %>% mutate(BldgType=factor(BldgType, bldg_levels)) %>%
 
 hood_dummy$BedroomAbvGr <- factor(hood_dummy$BedroomAbvGr)
 
-
-df = hood_dummy %>% 
+hood_dummy %>% 
    group_by(nghbr_Blueste, BedroomAbvGr) %>% 
    #filter(nghbr_Blueste == 1) %>% 
    summarise(MedBedPrice = median(SalePrice/1000)) %>% 
-   arrange(desc(MedBedPrice)) 
-
-bedlevels = df %>% filter(nghbr_Blueste == 0) %>% .$BedroomAbvGr
-df %>% mutate(BedroomAbvGr=factor(BedroomAbvGr, bedlevels)) %>%
+   arrange(desc(MedBedPrice)) %>% 
    ggplot(aes(x=BedroomAbvGr, y=(MedBedPrice), fill = nghbr_Blueste)) + 
    geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
    theme_bw() + 
