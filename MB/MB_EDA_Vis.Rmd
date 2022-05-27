@@ -41,11 +41,21 @@ house_price$SalePriceShort <- round(house_price$SalePrice/1000,2)
 house_price$SalePriceShort
 
 house_price %>% ggplot(aes(x = SalePriceShort)) + 
-  geom_histogram(bins = 50, col= "white", fill="#698adb") +
+  geom_histogram(aes(y=..density..), bins = 50, col= "white", fill="#698adb") +
+  geom_density(col = '#698adb') +
   theme_bw() + 
   theme_ipsum() + 
-  labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price (Thousand Dollars)', y='Count',) 
+  labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price ($1000 USD)', y='Density') 
   
+
+ggplot(df, aes(x)) +
+  geom_histogram(aes(y = after_stat(density))) +
+  stat_function(
+    fun = dnorm, 
+    args = list(mean = mean(df$x), sd = sd(df$x)), 
+    lwd = 2, 
+    col = 'red'
+  )
 
 # most houses sold are ~ $160,000 
 # data is a bit more right skewed - potentially log the price? 
@@ -57,10 +67,11 @@ house_price <- data.frame(read.csv('data/Ames_HousePrice_cleaned.csv'))
 house_price$LogSalePrice <- log(house_price$SalePrice)
 
 house_price %>% ggplot(aes(x = LogSalePrice)) + 
-  geom_histogram(bins = 50, col= "white", fill="#698adb") +
+  geom_histogram(aes(y=..density..), bins = 50, col= "white", fill="#698adb") +
+  geom_density(col = '#698adb') +
   theme_bw() + 
   theme_ipsum() +
-  labs(title = "Log Sale Price Distribution in Ames, Iowa", x = 'Log Sale Price', y='Count',) 
+  labs(title = "Log Sale Price Distribution in Ames, Iowa", x = 'Log Sale Price', y='Density',) 
   
 ```
 
@@ -339,12 +350,21 @@ hood_dummy = read.csv('data/hood_dummy.csv')
 hood_dummy$BldgType <- factor(hood_dummy$BldgType)
 hood_dummy$nghbr_Blueste <- factor(hood_dummy$nghbr_Blueste)
 
-
-hood_dummy %>% 
+df = hood_dummy %>% 
    group_by(nghbr_Blueste, BldgType) %>% 
    #filter(nghbr_Blueste == 1) %>% 
    summarise(MedianPrice = median(SalePrice/1000)) %>% 
-   arrange(desc(MedianPrice)) %>% 
+   arrange(desc(MedianPrice)) 
+
+
+bldg_levels = df %>% filter(nghbr_Blueste == 0) %>% .$BldgType
+df %>% mutate(BldgType=factor(BldgType, bldg_levels)) %>%
+
+# hood_dummy %>% 
+#    group_by(nghbr_Blueste, BldgType) %>% 
+#    #filter(nghbr_Blueste == 1) %>% 
+#    summarise(MedianPrice = median(SalePrice/1000)) %>% 
+#    arrange(desc(MedianPrice)) %>% 
    ggplot(aes(x=BldgType, y=MedianPrice, fill = nghbr_Blueste)) +
   geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
    theme_bw() + 
@@ -358,17 +378,21 @@ hood_dummy %>%
 
 hood_dummy$BedroomAbvGr <- factor(hood_dummy$BedroomAbvGr)
 
-hood_dummy %>% 
+
+df = hood_dummy %>% 
    group_by(nghbr_Blueste, BedroomAbvGr) %>% 
    #filter(nghbr_Blueste == 1) %>% 
    summarise(MedBedPrice = median(SalePrice/1000)) %>% 
-   arrange(desc(MedBedPrice)) %>% 
+   arrange(desc(MedBedPrice)) 
+
+bedlevels = df %>% filter(nghbr_Blueste == 0) %>% .$BedroomAbvGr
+df %>% mutate(BedroomAbvGr=factor(BedroomAbvGr, bedlevels)) %>%
    ggplot(aes(x=BedroomAbvGr, y=(MedBedPrice), fill = nghbr_Blueste)) + 
    geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
    theme_bw() + 
    theme_ipsum() +
    labs(x = 'Bedrooms Above Ground', y='Median Sale Price ($1000 USD)', title = 'Price by Number of Bedrooms', color = 'Neighborhood') +
-   scale_fill_manual(values=c("#CD7672", "#F6A586"), name = "Neighborhood", labels = c("All Other Neighborhoods", "Bluestem"))
+   scale_fill_manual(values=c("#CD7672", "#EEB462"), name = "Neighborhood", labels = c("All Other Neighborhoods", "Bluestem"))
 ```
 
 
