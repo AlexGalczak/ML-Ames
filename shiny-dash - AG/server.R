@@ -108,6 +108,14 @@ shinyServer(
       )
     
     
+    output$AmesInfoBox <- renderInfoBox({
+      infoBox(
+        "Progress", icon = icon("list"),
+        color = "purple"
+      )
+    })
+    
+    
     output$price_sqft <- renderPlot({
       df %>% 
         mutate(TotSF = TotalBsmtSF + GrLivArea) %>% 
@@ -164,21 +172,7 @@ shinyServer(
       
     })
     
-    #clean_dummy$nghbr_Blueste <- factor(clean_dummy$nghbr_Blueste)
-    
-    output$density <- renderPlot({
-    clean_dummy %>% 
-      filter(Neighborhood %in% input$hood) %>%
-      ggplot(aes(x=SalePrice,  fill=nghbr_Blueste, group=nghbr_Blueste)) +
-      geom_density(adjust=1.5, alpha=0.6) +
-      scale_fill_viridis(discrete=TRUE) +
-      scale_color_viridis(discrete=TRUE) +
-      theme_ipsum() +
-      labs(x='SalePrice', y='Density') + 
-      guides(fill=guide_legend(title='Bluestem'))
-      
-    }
-    )
+
     
   }
 )
