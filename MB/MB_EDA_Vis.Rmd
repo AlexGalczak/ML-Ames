@@ -218,6 +218,7 @@ house_price <- house_price %>%
   mutate(Age = YrSold - YearBuilt)
 
 house_price <- house_price %>% relocate(Age, .after = YearBuilt)
+house_price$SalePriceShort <- round(house_price$SalePrice/1000,2)
 
 house_price %>% 
   ggplot(aes(x=Age, y=SalePriceShort, color=SalePriceShort)) + 
@@ -318,7 +319,7 @@ clean_dummy %>%
 ```{r  House Age and Sq Ft Price }
 
 house_price %>% 
-  ggplot(aes(x=Age, y=SFPrice, color = OverallQual, alpha = 0.9)) + 
+  ggplot(aes(x=Age, y=SFPrice, color = as.integer(OverallQual), alpha = 0.9)) + 
   scale_color_gradient(low="#534666", high="#EEB462") +
   geom_point() + 
   geom_smooth(method=lm, color = '#534666') +
@@ -328,6 +329,48 @@ house_price %>%
   labs(x = 'House Age', y="Square Foot Price (USD)", title = "Square Foot Price by House Age", color='House Quality') 
 
 ```
+
+
+
+```{r  Neighborhood Building Type }
+
+hood_dummy = read.csv('data/hood_dummy.csv')
+
+hood_dummy$BldgType <- factor(hood_dummy$BldgType)
+hood_dummy$nghbr_Blueste <- factor(hood_dummy$nghbr_Blueste)
+
+
+hood_dummy %>% 
+   group_by(nghbr_Blueste, BldgType) %>% 
+   #filter(nghbr_Blueste == 1) %>% 
+   summarise(MedianPrice = median(SalePrice/1000)) %>% 
+   arrange(desc(MedianPrice)) %>% 
+   ggplot(aes(x=BldgType, y=MedianPrice, fill = nghbr_Blueste)) +
+  geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
+   theme_bw() + 
+   theme_ipsum() +
+   labs(x = 'Building Type', y='Median Sale Price ($1000 USD)', title = 'Price by House Building Type', color = 'Neighborhood') +
+   scale_fill_manual(values=c("#264D59", "#138086","#43978D", "#63C0B5", "#90D1C9"), name = "Building Type", labels = c("All Other Neighborhoods", "Bluestem")) +
+   theme(axis.text.x=element_text(size=11, angle=30, vjust=.8, hjust=0.8))
+```
+
+```{r}
+
+hood_dummy$BedroomAbvGr <- factor(hood_dummy$BedroomAbvGr)
+
+hood_dummy %>% 
+   group_by(nghbr_Blueste, BedroomAbvGr) %>% 
+   #filter(nghbr_Blueste == 1) %>% 
+   summarise(MedBedPrice = median(SalePrice/1000)) %>% 
+   arrange(desc(MedBedPrice)) %>% 
+   ggplot(aes(x=BedroomAbvGr, y=(MedBedPrice), fill = nghbr_Blueste)) + 
+   geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
+   theme_bw() + 
+   theme_ipsum() +
+   labs(x = 'Bedrooms Above Ground', y='Median Sale Price ($1000 USD)', title = 'Price by Number of Bedrooms', color = 'Neighborhood') +
+   scale_fill_manual(values=c("#CD7672", "#F6A586"), name = "Neighborhood", labels = c("All Other Neighborhoods", "Bluestem"))
+```
+
 
 
 
