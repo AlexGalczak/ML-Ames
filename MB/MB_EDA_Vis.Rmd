@@ -269,13 +269,13 @@ house_price
 options(repr.plot.width=20, repr.plot.height=6)
 
 house_price %>% 
-  ggplot(aes(x = BsmtFinPerc, y=SalePriceShort, color = SalePrice)) + 
+  ggplot(aes(x = BsmtFinPerc, y=SalePriceShort, color = SalePriceShort)) + 
   facet_grid(.~AgeBin, scales='free_x', space = 'free_x') +
   geom_point() + 
   labs(title = "Price by Percent Finished Basement Grouped by House Age", x = "Total % of Basement Finished", y="Sale Price ($1000 USD)") +
   theme_bw() +
   theme_ipsum() +
-  theme(axis.text.x=element_text(size=11, angle=90, vjust=.8, hjust=0.8))
+  theme(axis.text.x=element_text(size=6, angle=0, vjust=.8, hjust=0.8))
 
 
 
