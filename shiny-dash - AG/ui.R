@@ -267,23 +267,29 @@ background: #FFAE66;
                   label = NULL,
                   choices = c('All' , hoods),
                   multiple = FALSE,
-                  selected = "All"
+                  selected = "Blmngtn"
                 )
               )),
             column(
-              width = 9,
+              width = 12,
               box
-              (width = 6,
-                plotOutput("price_sqft")),
-              box
-              (width = 6,
-                plotOutput("price_qual")),
-              box
-              (width = 6,
+              (width = 4,
                 plotOutput("density")),
               box
-              (width = 6,
-                plotOutput("prediction"))
+              (width = 4,
+                plotOutput("price_qual")),
+              box
+              (width = 4,
+                plotOutput("price_sqft")),
+              box
+              (width = 4,
+                plotOutput("buildingtype")),
+              box
+              (width = 4,
+                plotOutput("beds")),
+              box
+              (width = 4,
+                plotOutput("temp"))
             )
           ))
       )
