@@ -130,6 +130,13 @@ Amesmap_hood = ggplot()+
 Amesmap_hood
 
 ```
+```{r  Neighborhood Boundary Zoomed Map }
+
+
+
+
+
+```
 
 
 
