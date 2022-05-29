@@ -8,6 +8,8 @@
 
 
 
+
+
 hoods = data.frame(t(nbhd$Neighborhood))
 colnames(hoods) <- nbhd$Name
 library(bslib)
@@ -108,254 +110,273 @@ background: #FFAE66;
       
       #info box
       tabItems(
-        tabItem(tabName = "Info",
-                #h2("Ames, IOWA"),
-                
-                fluidRow(
-                  box
-                  (class = "text-left",
-                    title = h2("MACHINE LEARNING = THE FUTURE OF REAL ESTATE"),
-                    img(
-                      src = "Screenshot 2022-05-28 204005.jpg",
-                      height = "80%",
-                      width = "80%"
-                    ), br(),
-
-
-                    width = 9,
-                    height = "500px"
-                  ),
-                  
-                  
-                  
-                  flipBox(
-
-                    id = "myflipbox2",
-                    width = 3,
-                    front = div(
-                      class = "text-center",
-                      h2("Ames, IOWA"),
-                      img(
-                        src = "Ames_Montage.JPG",
-                        height = "90%",
-                        width = "90%"
-                      )
-                    ),
-                    back = div(
-                      class = "text-left",
-                      height = "800px",
-                      width = "100%",
-                      h1("Ames, Iowa"),
-                      p("Ames (/eɪmz/) is a city in Story County, Iowa, United States, located approximately 30 miles (48 km) north of 
-                      Des Moines in central Iowa. It is best known as the home of Iowa State University (ISU), with 
-                      leading agriculture, design, engineering, and veterinary medicine colleges. A United States Department of Energy national laboratory, 
-                      Ames Laboratory, is located on the ISU campus.", br(), br(),
-                        
-                        "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.[4] 
-                        Iowa State University was home to 33,391 students as of fall 2019,[5] which make up approximately one half of 
-                        the city's population.", br(), br(),
-                        
-                        "Ames also hosts United States Department of Agriculture (USDA) sites: the largest federal animal disease center 
-                        in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC),[6] as well as, 
-                        one of two national USDA sites for the Animal and Plant Health Inspection Service (APHIS), which comprises the National 
-                        Veterinary Services Laboratory and the Center for Veterinary Biologics.[7] Ames also hosts the headquarters for the Iowa 
-                        Department of Transportation.")
-                    )
-                  )
-                ),
-                
-                fluidRow(
-                  userBox(
-                    width = 3,
-                    title = userDescription(
-                      title = "Alex",
-                      subtitle = "user title",
-                      type = 1,
-                      image = "IMG_4575.JPG"
-                    ),
-                    status = NULL,
-                    gradient = TRUE,
-                    background = "light-blue",
-                    boxToolSize = "not sure what this does",
-                    "something",
-                    
-                    div(
-                      class = "text-left",
-                      height = "100%",
-                      width = "100%",
-                      h4("Alex Galczak"),
-                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj")
-                    )
-                    #footer = FALSE
-                  ),
-                  
-                  userBox(
-                    width = 3,
-                    title = userDescription(
-                      title = "Chad Loh",
-                      subtitle = "user title",
-                      type = 1,
-                      image = "image"
-                    ),
-                    status = "warning",
-                    #gradient = TRUE,
-                    #background = "light-blue",
-                    boxToolSize = "not sure what this does",
-                    "something",
-                    
-                    div(
-                      class = "text-left",
-                      height = "100%",
-                      width = "100%",
-                      h4("Chad Loh"),
-                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj")
-                    )
-                    #footer = FALSE
-                  ),
-                  
-
-                  userBox(
-                    width = 3,
-                    title = userDescription(
-                      title = "Chad Loh",
-                      subtitle = "user title",
-                      type = 1,
-                      image = "image"
-                    ),
-                    status = "warning",
-                    #gradient = TRUE,
-                    #background = "light-blue",
-                    boxToolSize = "not sure what this does",
-                    "something",
-                    
-                    div(
-                      class = "text-left",
-                      height = "100%",
-                      width = "100%",
-                      h4("Chad Loh"),
-                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj")
-                    )
-                    #footer = FALSE
-                  ),
-                  
-                  
-                  userBox(
-                    width = 3,
-                    title = userDescription(
-                      title = "Chad Loh",
-                      subtitle = "user title",
-                      type = 1,
-                      image = "image"
-                    ),
-                    status = "warning",
-                    #gradient = TRUE,
-                    #background = "light-blue",
-                    boxToolSize = "not sure what this does",
-                    "something",
-                    
-                    div(
-                      class = "text-left",
-                      height = "100%",
-                      width = "100%",
-                      h4("Chad Loh"),
-                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj")
-                    )
-                    #footer = FALSE
-                  )
-                  
-                  
-                  
+        tabItem(
+          tabName = "Info",
+          #h2("Ames, IOWA"),
+          
+          fluidRow(
+            box
+            (
+              class = "text-left",
+              title = h2("MACHINE LEARNING = THE FUTURE OF REAL ESTATE"),
+              img(
+                src = "Screenshot 2022-05-28 204005.jpg",
+                height = "530px",
+                width = "80%"
+              ),
+              br(),
+              width = 9,
+              height = "500px"
+            ),
+            
+            flipBox(
+              id = "myflipbox2",
+              width = 3,
+              front = div(
+                class = "text-center",
+                h2("Ames, IOWA"),
+                img(
+                  src = "Ames_Montage.JPG",
+                  height = "90%",
+                  width = "90%"
                 )
-                ), 
+              ),
+              back = div(
+                class = "text-left",
+                height = "800px",
+                width = "100%",
+                h2("Ames, Iowa"),
+                p(
+                  "Ames (/eɪmz/) is a city in Story County, Iowa, United States, located approximately 30 miles (48 km) north of
+                      Des Moines in central Iowa. It is best known as the home of Iowa State University (ISU), with
+                      leading agriculture, design, engineering, and veterinary medicine colleges. A United States Department of Energy national laboratory,
+                      Ames Laboratory, is located on the ISU campus.",
+                  br(),
+                  br(),
+                  
+                  "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.[4]
+                        Iowa State University was home to 33,391 students as of fall 2019,[5] which make up approximately one half of
+                        the city's population.",
+                  br(),
+                  br(),
+                  
+                  "Ames also hosts United States Department of Agriculture (USDA) sites: the largest federal animal disease center
+                        in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC),[6] as well as,
+                        one of two national USDA sites for the Animal and Plant Health Inspection Service (APHIS), which comprises the National
+                        Veterinary Services Laboratory and the Center for Veterinary Biologics.[7] Ames also hosts the headquarters for the Iowa
+                        Department of Transportation."
+                )
+              )
+            )
+          ),
+          
+          fluidRow(
+            userBox(
+              width = 3,
+              title = userDescription(
+                title = "Alex",
+                subtitle = "user title",
+                type = 1,
+                image = "IMG_4575.JPG"
+              ),
+              status = NULL,
+              gradient = TRUE,
+              background = "light-blue",
+              div(
+                class = "text-left",
+                height = "100%",
+                width = "100%",
+                h4("Alex Galczak"),
+                p(
+                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj"
+                )
+              )
+              #footer = FALSE
+            ),
+            
+            userBox(
+              width = 3,
+              title = userDescription(
+                title = "Chad Loh",
+                subtitle = "user title",
+                type = 1,
+                image = "image"
+              ),
+              status = "warning",
+              #gradient = TRUE,
+              #background = "light-blue",
+              div(
+                class = "text-left",
+                height = "100%",
+                width = "100%",
+                h4("Chad Loh"),
+                p(
+                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj"
+                )
+              )
+              #footer = FALSE
+            ),
+            
+            
+            userBox(
+              width = 3,
+              title = userDescription(
+                title = "Michelle",
+                subtitle = "user title",
+                type = 2,
+                image = "IMG_4575.JPG"
+              ),
+              status = "purple",
+              #gradient = TRUE,
+              #background = "light-blue",
+              boxToolSize = "not sure what this does",
+              "something",
+              
+              div(
+                class = "text-left",
+                height = "100%",
+                width = "100%",
+                h4("Chad Loh"),
+                p(
+                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj"
+                )
+              )
+              #footer = FALSE
+            ),
+            
+            
+            userBox(
+              width = 3,
+              title = userDescription(
+                title = "James",
+                subtitle = "user title",
+                type = 1,
+                image = "image"
+              ),
+              status = "black",
+              #gradient = TRUE,
+              #background = "light-blue",
+              boxToolSize = "not sure what this does",
+              "something",
+              
+              div(
+                class = "text-left",
+                height = "100%",
+                width = "100%",
+                h4("Chad Loh"),
+                p(
+                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj"
+                )
+              )
+              #footer = FALSE
+            )
+          )
+        ),
         
         
         tabItem
-        (tabName = "Map",
+        (
+          tabName = "Map",
+          
           fluidRow(
-            column(
+            height = "400px",
+            
+            box
+            (
+              title = h4("Neighborhood"),
+              status = "danger",
               width = 3,
-              box
+              height = "200px",
+              selectInput
               (
-                title = h4("Neighborhood"),
-                status = "danger",
-                width = 12,
-                selectInput
-                (
-                  "hood",
-                  label = NULL,
-                  choices = c('All' , hoods),
-                  multiple = TRUE,
-                  selected = "All"
-                )
-              ),
-              box
+                "hood",
+                label = NULL,
+                choices = c('All' , hoods),
+                multiple = TRUE,
+                selected = "NAmes"
+              )
+            ),
+            
+            
+            box
+            (
+              title = h4("Price Range"),
+              solidHeader = TRUE,
+              width = 3,
+              height = "150px",
+              sliderInput
               (
-                title = h4("Price Range"),
-                solidHeader = TRUE,
-                width = 12,
-                sliderInput
-                (
-                  "price",
+                "price",
+                label = NULL,
+                min = 0,
+                max = 800000,
+                value = c(0, 800000),
+                sep = "",
+                step = 10000,
+                round = 4
+              )
+            ),
+            
+            
+
+            tabBox(
+              title = h4("House Properties"),
+              width = 3,
+              height = "150px",
+              side = "right",
+              id = "houseprop",
+              
+              
+              tabPanel(
+                title = "Baths",
+                "Select number of Bathrooms",
+                sliderInput(
+                  "FullBath",
                   label = NULL,
                   min = 0,
-                  max = 800000,
-                  value = c(0, 800000),
-                  sep = "",
-                  step = 10000,
-                  round = 4
+                  max = 5,
+                  value = c(0, 5)
                 )
               ),
-              box
-              (
-                title = h4("Number of Bedrooms"),
-                width = 12,
-                sliderInput
-                (
+              
+              
+              
+              tabPanel(
+                title = "Beds",
+                "Select number of bedrooms",
+                sliderInput(
                   "BedroomAbvGr",
                   label = NULL,
                   min = 0,
                   max = 5,
-                  value = 5
+                  value = c(0, 5)
                 )
               ),
-              box
-              (
-                title = h4("Number of Bathrooms"),
-                
-                width = 12,
-                sliderInput
-                (
-                  "FullBath",
-                  label = NULL,
-                  min = 0,
-                  max = 4,
-                  value = 4
-                )
-              ),
-              box
-              (
-                title = h4("Total Area (sqft)"),
-                width = 12,
+              
+              
+              
+              tabPanel(
+                title = "Area",
+                "Select desired area",
                 sliderInput
                 (
                   "GrLivArea",
-                  
                   label = NULL,
                   min = 0,
                   max = 5000,
@@ -364,10 +385,20 @@ background: #FFAE66;
                   round = 2
                 )
               ),
-              box
-              (
-                title = h4("Building Type"),
-                width = 12,
+              
+              
+            ),
+            
+            tabBox(
+              title = h4("Other filters"),
+              width = 3,
+              height = "150px",
+              side = "right",
+              id = "houseprop",
+              
+              tabPanel(
+                title = "Building Type",
+                "Select Buidling Type",
                 checkboxGroupInput(
                   "BldgType",
                   label = NULL,
@@ -383,32 +414,35 @@ background: #FFAE66;
                   inline = TRUE
                 )
               ),
-              box
-              (
-                title = h4("Age"),
+              
+              tabPanel(
+                title = "Year Built",
+                "Select Year Built",
                 width = 12,
                 sliderInput
                 (
                   "age",
                   label = NULL,
-                  min = 0,
-                  max = 100,
-                  value = c(0, 100),
+                  min = 1870,
+                  max = max(house_price$YearBuilt),
+                  value = c(1870, 2010),
                   sep = "",
-                  step = 1
+                  step = 5
                 )
               )
             ),
-            column
-            (width = 9,
+            
+            
+            fluidRow
+            (width = 12,
               box
               (
-                title = h3("Map of Ames, IA"),
+                #title =NULL,
                 girafeOutput("Amesmap", width = "90%", height = "90%"),
                 width = 12
               ))
-          )),
-        
+          )
+        ),
         
         
         tabItem

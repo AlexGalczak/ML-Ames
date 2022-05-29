@@ -70,8 +70,10 @@ shinyServer(function(input, output)
                                  
                                  SalePrice >= input$price[1] &
                                  SalePrice <= input$price[2] &
-                                 BedroomAbvGr <= input$BedroomAbvGr &
-                                 FullBath <= input$FullBath &
+                                 BedroomAbvGr >= input$BedroomAbvGr[1] &
+                                 BedroomAbvGr <= input$BedroomAbvGr[2] &
+                                 FullBath >= input$FullBath[1] &
+                                 FullBath <= input$FullBath[2] &
                                  GrLivArea >= input$GrLivArea[1] &
                                  GrLivArea <= input$GrLivArea[2]
           ),
