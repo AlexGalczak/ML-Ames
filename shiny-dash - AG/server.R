@@ -102,7 +102,7 @@ shinyServer(function(input, output)
         #           aes( x = Longitude, y = Latitude, color = SalePrice), alpha = 0.5, size=1) +
         
       
-      xlim(-93.7, -93.52) +
+      xlim(-93.7,-93.52) +
         ylim(41.98, 42.08) +
         # scale_color_gradientn(limits = c(0,350000),colours=c("navyblue", "darkmagenta", "darkorange1")) +
         theme(
@@ -130,19 +130,51 @@ shinyServer(function(input, output)
              ))
     })
   
-  
   output$AmesInfoBox <- renderInfoBox({
-    infoBox("Progress", icon = icon("list"),
-            color = "purple")
+    infoBox("Ames Info Page")
+    
+    
+  })
+  
+  
+
+  
+  output$active_side_2 <- renderUI({
+    side <- if (input$myflipbox2)
+      "front"
+    else
+      "back"
+    dashboardBadge(side, color = "blue")
+  })
+  
+  output$active_side_3 <- renderUI({
+    side <- if (input$myflipbox3)
+      "front"
+    else
+      "back"
+    dashboardBadge(side, color = "blue")
+  })
+  
+  output$active_side_4 <- renderUI({
+    side <- if (input$myflipbox4)
+      "front"
+    else
+      "back"
+    dashboardBadge(side, color = "blue")
+  })
+  
+  observeEvent(input$toggle, {
+    updateFlipBox("myflipbox")
+    
+    
+    
   })
   
   output$buildingtype <- renderPlot({
-
-    
     df %>%
       group_by(Neighborhood, BldgType) %>%
       summarise(MedianPrice = median(SalePrice / 1000)) %>%
-      arrange(desc(MedianPrice))%>% 
+      arrange(desc(MedianPrice)) %>%
       mutate(BldgType = factor(BldgType)) %>%
       filter(Neighborhood %in% input$hood_analysis |
                input$hood_analysis == "All") %>%
@@ -173,7 +205,7 @@ shinyServer(function(input, output)
         hjust = 0.8
       ))
     
-
+    
     
   })
   
@@ -223,10 +255,14 @@ shinyServer(function(input, output)
       
       ggplot(aes(
         x = SalePriceShort,
-        group = c(Neighborhood %in% input$hood_analysis &
-                    Neighborhood == "All"),
-        fill = c(Neighborhood %in% input$hood_analysis &
-                   Neighborhood == "All")
+        group = c(
+          Neighborhood %in% input$hood_analysis &
+            Neighborhood == "All"
+        ),
+        fill = c(
+          Neighborhood %in% input$hood_analysis &
+            Neighborhood == "All"
+        )
       )) +
       geom_density(adjust = 1.5, alpha = 0.6) +
       scale_fill_viridis(discrete = TRUE) +
@@ -237,7 +273,7 @@ shinyServer(function(input, output)
       scale_fill_manual(
         values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c(input$hood_analysis, input$hood_analysis=="All")
+        labels = c(input$hood_analysis, input$hood_analysis == "All")
       )
     
   })

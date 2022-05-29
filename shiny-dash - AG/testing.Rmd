@@ -4,6 +4,8 @@ fontawesome
 fa_metadata()
 
 ?box
+?img
+?includeText
 
 
 

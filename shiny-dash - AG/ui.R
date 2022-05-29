@@ -3,6 +3,11 @@
 
 
 
+
+
+
+
+
 hoods = data.frame(t(nbhd$Neighborhood))
 colnames(hoods) <- nbhd$Name
 library(bslib)
@@ -101,26 +106,183 @@ background: #FFAE66;
         )
       ),
       
-      
       #info box
       tabItems(
-        tabItem
-        (tabName = "info",
-          fluidRow(
-            column(
-              width = 3,
-              infoBox
-              (
-                "testing",
-                title = h4("Neighborhood"),
-                "Lets see if this works",
-                color = "black",
-                width = 12
-              ),
-              infoBoxOutput("AmesInfoBox")
-            )
-          )),
-        
+        tabItem(tabName = "Info",
+                #h2("Ames, IOWA"),
+                
+                fluidRow(
+                  box
+                  (class = "text-left",
+                    title = h2("MACHINE LEARNING = THE FUTURE OF REAL ESTATE"),
+                    img(
+                      src = "Screenshot 2022-05-28 204005.jpg",
+                      height = "80%",
+                      width = "80%"
+                    ), br(),
+
+
+                    width = 9,
+                    height = "500px"
+                  ),
+                  
+                  
+                  
+                  flipBox(
+
+                    id = "myflipbox2",
+                    width = 3,
+                    front = div(
+                      class = "text-center",
+                      h2("Ames, IOWA"),
+                      img(
+                        src = "Ames_Montage.JPG",
+                        height = "90%",
+                        width = "90%"
+                      )
+                    ),
+                    back = div(
+                      class = "text-left",
+                      height = "800px",
+                      width = "100%",
+                      h1("Ames, Iowa"),
+                      p("Ames (/eɪmz/) is a city in Story County, Iowa, United States, located approximately 30 miles (48 km) north of 
+                      Des Moines in central Iowa. It is best known as the home of Iowa State University (ISU), with 
+                      leading agriculture, design, engineering, and veterinary medicine colleges. A United States Department of Energy national laboratory, 
+                      Ames Laboratory, is located on the ISU campus.", br(), br(),
+                        
+                        "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.[4] 
+                        Iowa State University was home to 33,391 students as of fall 2019,[5] which make up approximately one half of 
+                        the city's population.", br(), br(),
+                        
+                        "Ames also hosts United States Department of Agriculture (USDA) sites: the largest federal animal disease center 
+                        in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC),[6] as well as, 
+                        one of two national USDA sites for the Animal and Plant Health Inspection Service (APHIS), which comprises the National 
+                        Veterinary Services Laboratory and the Center for Veterinary Biologics.[7] Ames also hosts the headquarters for the Iowa 
+                        Department of Transportation.")
+                    )
+                  )
+                ),
+                
+                fluidRow(
+                  userBox(
+                    width = 3,
+                    title = userDescription(
+                      title = "Alex",
+                      subtitle = "user title",
+                      type = 1,
+                      image = "IMG_4575.JPG"
+                    ),
+                    status = NULL,
+                    gradient = TRUE,
+                    background = "light-blue",
+                    boxToolSize = "not sure what this does",
+                    "something",
+                    
+                    div(
+                      class = "text-left",
+                      height = "100%",
+                      width = "100%",
+                      h4("Alex Galczak"),
+                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj")
+                    )
+                    #footer = FALSE
+                  ),
+                  
+                  userBox(
+                    width = 3,
+                    title = userDescription(
+                      title = "Chad Loh",
+                      subtitle = "user title",
+                      type = 1,
+                      image = "image"
+                    ),
+                    status = "warning",
+                    #gradient = TRUE,
+                    #background = "light-blue",
+                    boxToolSize = "not sure what this does",
+                    "something",
+                    
+                    div(
+                      class = "text-left",
+                      height = "100%",
+                      width = "100%",
+                      h4("Chad Loh"),
+                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj")
+                    )
+                    #footer = FALSE
+                  ),
+                  
+
+                  userBox(
+                    width = 3,
+                    title = userDescription(
+                      title = "Chad Loh",
+                      subtitle = "user title",
+                      type = 1,
+                      image = "image"
+                    ),
+                    status = "warning",
+                    #gradient = TRUE,
+                    #background = "light-blue",
+                    boxToolSize = "not sure what this does",
+                    "something",
+                    
+                    div(
+                      class = "text-left",
+                      height = "100%",
+                      width = "100%",
+                      h4("Chad Loh"),
+                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj")
+                    )
+                    #footer = FALSE
+                  ),
+                  
+                  
+                  userBox(
+                    width = 3,
+                    title = userDescription(
+                      title = "Chad Loh",
+                      subtitle = "user title",
+                      type = 1,
+                      image = "image"
+                    ),
+                    status = "warning",
+                    #gradient = TRUE,
+                    #background = "light-blue",
+                    boxToolSize = "not sure what this does",
+                    "something",
+                    
+                    div(
+                      class = "text-left",
+                      height = "100%",
+                      width = "100%",
+                      h4("Chad Loh"),
+                      p("Brief Description lslajdkahfkdafsjflksjlckjsljc
+                        jdflksjflksjfljkslkjfclks
+                        jflsjflksjflkjsjf
+                        fslkjfdlksjflksj
+                        sjflkdjflksfjlj")
+                    )
+                    #footer = FALSE
+                  )
+                  
+                  
+                  
+                )
+                ), 
         
         
         tabItem
@@ -131,7 +293,6 @@ background: #FFAE66;
               box
               (
                 title = h4("Neighborhood"),
-                
                 status = "danger",
                 width = 12,
                 selectInput
@@ -207,10 +368,8 @@ background: #FFAE66;
               (
                 title = h4("Building Type"),
                 width = 12,
-                
                 checkboxGroupInput(
                   "BldgType",
-                  
                   label = NULL,
                   selected = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
                   choiceNames = c(
@@ -221,7 +380,6 @@ background: #FFAE66;
                     "Townhouse(End)"
                   ),
                   choiceValues = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
-                  
                   inline = TRUE
                 )
               ),
@@ -239,7 +397,6 @@ background: #FFAE66;
                   sep = "",
                   step = 1
                 )
-                
               )
             ),
             column
@@ -251,6 +408,9 @@ background: #FFAE66;
                 width = 12
               ))
           )),
+        
+        
+        
         tabItem
         (tabName = "Analysis",
           fluidRow
@@ -273,8 +433,11 @@ background: #FFAE66;
             column(
               width = 12,
               box
-              (width = 4,
-                plotOutput("density")),
+              (
+                title = h4("Neighborhood Price Distribution"),
+                width = 4,
+                plotOutput("density")
+              ),
               box
               (width = 4,
                 plotOutput("price_qual")),
