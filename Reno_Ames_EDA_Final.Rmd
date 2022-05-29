@@ -1,0 +1,170 @@
+---
+title: "Reno_Ames_EDA"
+author: "James Reno"
+date: '2022-05-17'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+theme_set(theme_bw())
+library(MASS)
+
+#install.packages("cowplot")
+library(cowplot)
+#install.packages("corrplot")
+library(corrplot)
+
+```
+
+
+```{r}
+
+ames_X = read.csv("ML-Ames/data/Ames_X.csv")
+ames_Y = read.csv("ML-Ames/data/Ames_Y.csv")
+
+colnames(ames_X)
+ames_X = ames_X[,-1]
+ames_Y = ames_Y[,-1]
+```
+
+
+```{r graph of quality times square feet versus sale price}
+
+ames = cbind(ames_X,ames_Y)
+
+colnames(ames)
+
+g = ames %>% mutate(SalePriceShort = round(ames_Y/1000),2) %>% 
+  ggplot(aes(x=QualXSF, y=SalePriceShort, size=GrLivArea, color=AgeSold)) +
+  geom_point(alpha=0.1)  +
+  labs(x="Quality * Square Feet",y="Sale Price\n($1,000 USD)",  size="Square Feet",color="Age")  +
+  scale_color_continuous(trans = 'reverse')  + scale_color_gradient(low="#534666", high="#EEB462") +
+  scale_x_continuous(labels = scales::comma) + theme_bw() + scale_size_continuous(labels = scales::comma) + geom_smooth(method=lm, se=FALSE, show.legend = FALSE, color = '#534666') + theme_ipsum(base_size=16)
+ 
+ggsave(
+  filename="QualitySF_Price.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+#+ guides(colour = guide_legend(override.aes = list(alpha = 0)))
+ames$SalePrice
+```
+
+```{r footprint vs price}
+ames %>% mutate(SalePriceShort = round(ames_Y/1000),2) %>% 
+  ggplot(aes(x=house_footprint, y=SalePriceShort, size=GrLivArea, color=AgeSold)) +
+  geom_point(alpha=0.1)  +
+  labs(x="House Footprint",y="Sale Price\n($1,000 USD)",  size="Square Feet",color="Age")  +
+  scale_color_continuous(trans = 'reverse')  + scale_color_gradient(low="#534666", high="#EEB462") +
+  scale_x_continuous(labels = scales::comma) + theme_bw() + scale_size_continuous(labels = scales::comma) + geom_smooth(method=lm, se=FALSE, show.legend = FALSE, color = '#534666') + theme_ipsum(base_size=16)
+```
+
+```{r positive relationship example}
+
+x_vals = seq(0,5,.01)
+err=seq(-3,3,.5)
+err2 = rnorm(1000)
+err3 = sample(err2,1000,replace=FALSE)
+
+x_pos = sample(x_vals,1000,replace=TRUE)
+y_pos = (x_pos*1)+err3
+
+x_y_pos2 = data.frame(x_neg,y_neg)
+
+
+
+g = x_y_pos2  %>% ggplot(aes(x=x_pos, y=y_pos)) +
+  geom_point(alpha=0.1)  +
+  labs(x="Feature 1",y="Feature 2",title="Positive Relationship") +
+  geom_smooth(method=lm, se=FALSE, show.legend = FALSE) + theme_ipsum(base_size=16) + 
+  scale_y_continuous(breaks=seq(1,6,by=1))
+
+
+ggsave(
+  filename="Positive_rel.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+
+```
+
+
+
+```{r negative relationship example}
+
+x_vals = seq(0,5,.01)
+err=seq(-3,3,.5)
+err2 = rnorm(1000)
+err3 = sample(err2,1000,replace=FALSE)
+
+x_neg = sample(x_vals,1000,replace=TRUE)
+y_neg = 6+(x_neg*-1)+err3
+
+x_y_neg2 = data.frame(x_neg,y_neg)
+
+
+
+g = x_y_neg2  %>% ggplot(aes(x=x_neg, y=y_neg)) +
+  geom_point(alpha=0.1)  +
+  labs(x="Feature 1",y="Feature 2",title="Negative Relationship") +
+  geom_smooth(method=lm, se=FALSE, show.legend = FALSE) + theme_ipsum(base_size=16) + 
+  scale_y_continuous(breaks=seq(1,6,by=1))
+
+ggsave(
+  filename="Negative_rel.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+
+```
+
+
+```{r no relationship example}
+
+x_vals = seq(0,5,.01)
+err=seq(-3,3,.5)
+err2 = rnorm(1000)
+err3 = sample(err2,1000,replace=FALSE)
+
+x_no = sample(x_vals,1000,replace=TRUE)
+y_no = 2.5+err3
+
+x_y_no2 = data.frame(x_neg,y_neg)
+
+
+
+g=x_y_no2  %>% ggplot(aes(x=x_no, y=y_no)) +
+  geom_point(alpha=0.1)  +
+  labs(x="Feature 1",y="Feature 2",title="No Relationship") +
+  geom_smooth(method=lm, se=FALSE, show.legend = FALSE) + theme_ipsum(base_size=16) + 
+  scale_y_continuous(breaks=seq(1,6,by=1))
+
+ggsave(
+  filename="No_rel.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+
+```
+
