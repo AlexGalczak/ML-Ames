@@ -1,0 +1,91 @@
+fontawesome
+
+?icon_names_full_fa
+fa_metadata()
+
+?box
+?img
+?includeText
+
+
+
+```{r}
+#Density plot
+
+clean_dummy <- read.csv('data/cleaned_dummies.csv')
+
+head(clean_dummy)
+
+
+clean_dummy$nghbr_Blueste <- factor(clean_dummy$nghbr_Blueste)
+clean_dummy %>% 
+  mutate(SalePriceShort = round(SalePrice/1000,2)) %>% 
+  ggplot(aes(x=SalePriceShort,  fill=nghbr_Blueste, group=nghbr_Blueste)) +
+  geom_density(adjust=1.5, alpha=0.6) +
+  scale_fill_viridis(discrete=TRUE) +
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum() +
+  labs(x='SalePrice ($1000 USD)', y='Density', title ='Price Distribution of Neighbourhood') +
+  scale_fill_manual(values=c("#EEB462", "#CD7672"), name = "Legend", labels = c("All Other Neighborhoods", "Bluestem"))
+  # scale_fill_discrete(labels = c("All Other Neighborhoods", "Bluestem")) + 
+  # scale_fill_manual(values=c("#EEB462", "#CD7672")) 
+```
+```{r}
+ df %>%
+      filter(Neighborhood %in% input$hood_analysis |
+               input$hood_analysis == "All")  %>%
+      mutate(SalePriceShort = round(SalePrice / 1000), 2) %>%
+      ggplot(aes(
+        x = SalePriceShort,
+        group = c(Neighborhood %in% input$hood_analysis &
+                    Neighborhood == "All"),
+        fill = c(Neighborhood %in% input$hood_analysis &
+                   Neighborhood == "All")
+      )) +
+      geom_density(adjust = 1.5, alpha = 0.6) +
+      scale_fill_viridis(discrete = TRUE) +
+      scale_color_viridis(discrete = TRUE) +
+      theme_ipsum() +
+      #xlim(0, 4000) +
+      labs(x = 'SalePrice ($1000 USD)', y = 'Density', title = 'Price Distribution of Neighbourhood') +
+      scale_fill_manual(
+        values = c("#EEB462", "#CD7672"),
+        name = "Legend",
+        labels = c(input$hood_analysis, input$hood_analysis=="All")
+      )
+```
+
+
+
+```{r}
+
+#bar number of beds
+hood_dummy = read.csv('data/hood_dummy.csv')
+
+hood_dummy$BldgType <- factor(hood_dummy$BldgType)
+hood_dummy$nghbr_Blueste <- factor(hood_dummy$nghbr_Blueste)
+
+df = hood_dummy %>% 
+   group_by(nghbr_Blueste, BldgType) %>% 
+   #filter(nghbr_Blueste == 1) %>% 
+   summarise(MedianPrice = median(SalePrice/1000)) %>% 
+   arrange(desc(MedianPrice)) 
+
+
+bldg_levels = df %>% filter(nghbr_Blueste == 0) %>% .$BldgType
+df %>% mutate(BldgType=factor(BldgType, bldg_levels)) %>%
+
+# hood_dummy %>% 
+#    group_by(nghbr_Blueste, BldgType) %>% 
+#    #filter(nghbr_Blueste == 1) %>% 
+#    summarise(MedianPrice = median(SalePrice/1000)) %>% 
+#    arrange(desc(MedianPrice)) %>% 
+   ggplot(aes(x=BldgType, y=MedianPrice, fill = nghbr_Blueste)) +
+  geom_bar(position=position_dodge2(preserve = 'single'), stat='identity') + 
+   theme_bw() + 
+   theme_ipsum() +
+   labs(x = 'Building Type', y='Median Sale Price ($1000 USD)', title = 'Price by House Building Type', color = 'Neighborhood') +
+   scale_fill_manual(values=c("#264D59", "#138086","#43978D", "#63C0B5", "#90D1C9"), name = "Building Type", labels = c("All Other Neighborhoods", "Bluestem")) +
+   theme(axis.text.x=element_text(size=11, angle=30, vjust=.8, hjust=0.8))
+```
+
