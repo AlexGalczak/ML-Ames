@@ -154,16 +154,16 @@ background: #FFAE66;
                   br(),
                   br(),
                   
-                  "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.[4]
-                        Iowa State University was home to 33,391 students as of fall 2019,[5] which make up approximately one half of
+                  "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.
+                        Iowa State University was home to 33,391 students as of fall 2019, which make up approximately one half of
                         the city's population.",
                   br(),
                   br(),
                   
                   "Ames also hosts United States Department of Agriculture (USDA) sites: the largest federal animal disease center
-                        in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC),[6] as well as,
+                        in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC), as well as,
                         one of two national USDA sites for the Animal and Plant Health Inspection Service (APHIS), which comprises the National
-                        Veterinary Services Laboratory and the Center for Veterinary Biologics.[7] Ames also hosts the headquarters for the Iowa
+                        Veterinary Services Laboratory and the Center for Veterinary Biologics. Ames also hosts the headquarters for the Iowa
                         Department of Transportation."
                 )
               )
@@ -488,8 +488,149 @@ background: #FFAE66;
               (width = 4,
                 plotOutput("temp"))
             )
-          ))
+          )),
+        
+        
+        
+        
+        tabItem(
+          tabName = "Predictions",
+          fluidRow
+          (
+              box
+              (
+                title = h4("Neighborhood"),
+                width = 3,
+                selectInput
+                (
+                  input = "hood_prediction",
+                  label = NULL,
+                  choices = c('All' , hoods),
+                  multiple = FALSE,
+                  selected = "Blmngtn")),
+            
+            tabBox(
+              title = h4("House Properties"),
+              width = 3,
+              height = "150px",
+              side = "right",
+              id = "houseprop",
+              
+              
+              tabPanel(
+                title = "Baths",
+                "Select number of Bathrooms",
+                sliderInput(
+                  "FullBath",
+                  label = NULL,
+                  min = 0,
+                  max = 5,
+                  value = c(0, 5)
+                )
+              ),
+              
+              
+              
+              tabPanel(
+                title = "Beds",
+                "Select number of bedrooms",
+                sliderInput(
+                  "BedroomAbvGr",
+                  label = NULL,
+                  min = 0,
+                  max = 5,
+                  value = c(0, 5)
+                )
+              ),
+              
+              
+              
+              tabPanel(
+                title = "Area",
+                "Select desired area",
+                sliderInput
+                (
+                  "GrLivArea",
+                  label = NULL,
+                  min = 0,
+                  max = 5000,
+                  value = c(0, 5000),
+                  step = 200,
+                  round = 2
+                )
+              ),
+              
+              
+            ),
+            
+            tabBox(
+              title = h4("Other filters"),
+              width = 3,
+              height = "150px",
+              side = "right",
+              id = "houseprop",
+              
+              tabPanel(
+                title = "Building Type",
+                "Select Buidling Type",
+                checkboxGroupInput(
+                  "BldgType",
+                  label = NULL,
+                  selected = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                  choiceNames = c(
+                    "Single Family",
+                    "2-Family",
+                    "Duplex",
+                    "Townhouse(Inside)",
+                    "Townhouse(End)"
+                  ),
+                  choiceValues = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                  inline = TRUE
+                )
+              ),
+              
+              tabPanel(
+                title = "Year Built",
+                "Select Year Built",
+                width = 12,
+                sliderInput
+                (
+                  "age",
+                  label = NULL,
+                  min = 1870,
+                  max = max(house_price$YearBuilt),
+                  value = c(1870, 2010),
+                  sep = "",
+                  step = 5
+                )
+              )
+            ),
+            
+            
+            
+              
+              
+              box
+              (width = 12,
+                plotOutput("prediction"))
+              
+              
+              
+              
+              
+              
+            )
+          )
+          
+          
+          
+        )
+        
+        
+        
+        
+        
       )
     )
   )
-)
+

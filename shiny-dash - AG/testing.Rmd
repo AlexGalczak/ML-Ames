@@ -89,3 +89,15 @@ df %>% mutate(BldgType=factor(BldgType, bldg_levels)) %>%
    theme(axis.text.x=element_text(size=11, angle=30, vjust=.8, hjust=0.8))
 ```
 
+
+
+```{r}
+ames %>% 
+  mutate(SalePriceShort = round(ames_Y/1000),2) %>% 
+  ggplot(aes(x=QualXSF, y=SalePriceShort, size=GrLivArea, color=AgeSold)) +
+  geom_point(alpha=0.1)  +
+  labs(x="Quality * Square Feet",y="Sale Price\n($1,000 USD)",  size="Square Feet",color="Age")  +
+  scale_color_continuous(trans = 'reverse')  + scale_color_gradient(low="#534666", high="#EEB462") +
+  scale_x_continuous(labels = scales::comma) + theme_bw() + scale_size_continuous(labels = scales::comma) + geom_smooth(method=lm, se=FALSE, show.legend = FALSE, color = '#534666') + theme_ipsum(base_size=16)
+```
+
