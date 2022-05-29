@@ -300,7 +300,8 @@ background: #FFAE66;
             box
             (
               title = h4("Neighborhood"),
-              status = "danger",
+              status = "success",
+              solidHeader=TRUE,
               width = 3,
               height = "200px",
               selectInput
@@ -338,7 +339,7 @@ background: #FFAE66;
             tabBox(
               title = h4("House Properties"),
               width = 3,
-              height = "150px",
+              height = "200px",
               side = "right",
               id = "houseprop",
               
@@ -392,7 +393,7 @@ background: #FFAE66;
             tabBox(
               title = h4("Other filters"),
               width = 3,
-              height = "150px",
+              height = "200px",
               side = "right",
               id = "houseprop",
               

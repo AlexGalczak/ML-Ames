@@ -60,7 +60,7 @@ clean_dummy %>%
 ```{r}
 
 #bar number of beds
-hood_dummy = read.csv('data/hood_dummy.csv')
+hood_dummy = read.csv('hood_dummy.csv')
 
 hood_dummy$BldgType <- factor(hood_dummy$BldgType)
 hood_dummy$nghbr_Blueste <- factor(hood_dummy$nghbr_Blueste)
