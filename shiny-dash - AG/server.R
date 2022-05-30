@@ -173,32 +173,32 @@ shinyServer(function(input, output)
   })
   
   output$buildingtype <- renderPlot({
-    df %>%
-      group_by(Neighborhood, BldgType) %>%
-      summarise(MedianPrice = median(SalePrice / 1000)) %>%
-      arrange(desc(MedianPrice)) %>%
-      mutate(BldgType = factor(BldgType)) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All") %>%
+    
+    df_bldg <- df %>%
+      group_by(BldgType) %>%
+      summarise(MedianPrice = median(SalePrice / 1000))
+    
+    df_bldg_sel <- df %>%
+      filter(Neighborhood %in% input$hood_analysis) %>%
+      group_by(BldgType) %>%
+      summarise(MedianPrice_sel = median(SalePrice / 1000))
       
-      ggplot(aes(
-        x = BldgType,
-        y = MedianPrice,
-        fill = input$hood_analysis
-      )) +
-      geom_bar(position = position_dodge2(preserve = 'single'), stat = 'identity') +
-      theme_bw() +
+    df_bldg_join <- df_bldg %>%
+      left_join(df_bldg_sel) %>%
+      melt(id.vars='BldgType')
+      
+      ggplot() +
+        geom_bar(data = df_bldg_join, aes(x = BldgType, y = value, fill = variable), width = 0.5, stat = 'identity', position = 'dodge') +
       theme_ipsum() +
       labs(
         x = 'Building Type',
         y = 'Median Sale Price ($1000 USD)',
-        title = 'Price by House Building Type',
         color = 'Neighborhood'
       ) +
       scale_fill_manual(
-        values = c("#264D59", "#138086", "#43978D", "#63C0B5", "#90D1C9"),
+        values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c("All Other Neighborhoods", "Bluestem")
+        labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       ) +
       theme(axis.text.x = element_text(
         size = 11,
@@ -206,80 +206,63 @@ shinyServer(function(input, output)
         vjust = .8,
         hjust = 0.8
       ))
-    
-    
-    
   })
   
   output$price_sqft <- renderPlot({
-    df %>%
-      mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-      relocate(TotSF, .after = GrLivArea) %>%
-      mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
-      relocate(SFPrice, .after = SalePrice) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All") %>%
-      ggplot(aes(x = GrLivArea, y = SFPrice, color = SFPrice)) +
-      geom_point() +
+      ggplot()+
+      geom_point(data = df %>%
+                   mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
+                   mutate(SFPrice = round(SalePrice / TotSF, 2)),
+                 aes(x = GrLivArea, y = SFPrice),  color = '#dddddd', alpha = 0.5)+
+      geom_point(data = df %>%
+                   mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
+                   mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
+                   filter(Neighborhood %in% input$hood_analysis |
+                            input$hood_analysis == "All"),
+                 aes(x = GrLivArea, y = SFPrice, color = SFPrice), size = 3)+
       theme_ipsum() +
-      xlim(0, 8000) +
+      xlim(0, 4000) +
+      ylim(0,150) +
       theme(legend.position = "none") +
-      labs(title = "Square Foot Price by Above Ground Living Area",
-           x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
+      labs(x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
     
   })
   
   output$price_qual <- renderPlot({
-    df %>%
+    df_qual <- df %>%
       mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-      relocate(TotSF, .after = GrLivArea) %>%
       mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
-      relocate(SFPrice, .after = SalePrice) %>%
-      mutate(OverallQual = as.factor(OverallQual)) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All")  %>%
-      ggplot(aes(x = OverallQual, y = SFPrice)) +
-      geom_boxplot(color = "#5a7fdb",
-                   fill = "#ebae34",
-                   alpha = 0.3) +
+      mutate(OverallQual = as.factor(OverallQual))
+    
+      ggplot() +
+      geom_jitter(data = df_qual, aes(x = OverallQual, y = SFPrice),
+                  color = '#dddddd', alpha = 0.5) +
+      geom_jitter(data = df_qual %>% filter(Neighborhood %in% input$hood_analysis), aes(x = OverallQual, y = SFPrice),
+                  color = "#222222", fill = "#222222", size = 2, alpha = 0.75) +
+      geom_boxplot(data = df_qual %>% filter(Neighborhood %in% input$hood_analysis), aes(x = OverallQual, y = SFPrice),
+                   color = "#CD7672", fill = "#CD7672", alpha = 0.5) +
       theme_ipsum() +
-      labs(title = "Quality by Sq Ft Price", x = "Overall Quality", y = "Price Per Sq")
+      labs(x = "Overall Quality", y = "Price Per Sq")
     
   })
   
   
   
   output$density <- renderPlot({
-    df %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All")  %>%
-      mutate(SalePriceShort = round(SalePrice / 1000), 2) %>%
-      
-      ggplot(aes(
-        x = SalePriceShort,
-        group = c(
-          Neighborhood %in% input$hood_analysis &
-            Neighborhood == "All"
-        ),
-        fill = c(
-          Neighborhood %in% input$hood_analysis &
-            Neighborhood == "All"
-        )
-      )) +
-      geom_density(adjust = 1.5, alpha = 0.6) +
+    df_density <- df %>%
+      mutate(SalePriceShort = round(SalePrice / 1000), 2)
+    ggplot()+
+      geom_density(data = df_density, aes(x = SalePriceShort, fill = "#EEB462"), alpha = 0.6) +
+      geom_density(data = df_density %>% filter (Neighborhood %in% input$hood_analysis),
+                   aes(x = SalePriceShort, fill = "#CD7672"), alpha = 0.6) +
       scale_fill_viridis(discrete = TRUE) +
       scale_color_viridis(discrete = TRUE) +
       theme_ipsum() +
-      #xlim(0, 4000) +
-      labs(x = 'SalePrice ($1000 USD)', y = 'Density', title = 'Price Distribution of Neighbourhood') +
+      labs(x = 'SalePrice ($1000 USD)', y = 'Density') +
       scale_fill_manual(
         values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c(input$hood_analysis, input$hood_analysis == "All")
+        labels = c((neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name, "Ames")
       )
-    
   })
-  
-  
-  
 })

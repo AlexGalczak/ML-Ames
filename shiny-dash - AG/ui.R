@@ -1,18 +1,5 @@
-
-
-
-
-
-
-
-
-
-
-
-
 hoods = data.frame(t(nbhd$Neighborhood))
 colnames(hoods) <- nbhd$Name
-library(bslib)
 
 ? validColors
 shinyUI(
@@ -48,7 +35,7 @@ shinyUI(
           HTML(
             '
       .main-header .logo {
-        font-family: "Roboto", Roboto, "Roboto", serif;
+        font-family: "Helvetica", "Roboto", "Arial", san-serif;
         font-weight: medium;
         font-size: 24px;
       }
@@ -121,10 +108,8 @@ background: #FFAE66;
               title = h2("MACHINE LEARNING = THE FUTURE OF REAL ESTATE"),
               img(
                 src = "Screenshot 2022-05-28 204005.jpg",
-                height = "530px",
                 width = "80%"
               ),
-              br(),
               width = 9,
               height = "500px"
             ),
@@ -134,6 +119,8 @@ background: #FFAE66;
               width = 3,
               front = div(
                 class = "text-center",
+                height = "800px",
+                width = "100%",
                 h2("Ames, IOWA"),
                 img(
                   src = "Ames_Montage.JPG",
@@ -296,14 +283,11 @@ background: #FFAE66;
           
           fluidRow(
             height = "400px",
-            
             box
             (
-              title = h4("Neighborhood"),
-              status = "success",
-              solidHeader=TRUE,
+              title = h5("Neighborhood"),
+              solidHeader = TRUE,
               width = 3,
-              height = "200px",
               selectInput
               (
                 "hood",
@@ -317,10 +301,9 @@ background: #FFAE66;
             
             box
             (
-              title = h4("Price Range"),
+              title = h5("Price Range"),
               solidHeader = TRUE,
               width = 3,
-              height = "150px",
               sliderInput
               (
                 "price",
@@ -337,7 +320,7 @@ background: #FFAE66;
             
 
             tabBox(
-              title = h4("House Properties"),
+              title = h5("House Properties"),
               width = 3,
               height = "200px",
               side = "right",
@@ -391,7 +374,7 @@ background: #FFAE66;
             ),
             
             tabBox(
-              title = h4("Other filters"),
+              title = h5("Other filters"),
               width = 3,
               height = "200px",
               side = "right",
@@ -450,46 +433,40 @@ background: #FFAE66;
         (tabName = "Analysis",
           fluidRow
           (
-            column
-            (width = 3,
-              box
+            box
+            (
+              title = h5("Neighborhood"),
+              selectInput
               (
-                title = h4("Neighborhood"),
-                width = 12,
-                selectInput
-                (
-                  input = "hood_analysis",
-                  label = NULL,
-                  choices = c('All' , hoods),
-                  multiple = FALSE,
-                  selected = "Blmngtn"
-                )
-              )),
+                input = "hood_analysis",
+                label = NULL,
+                choices = c(hoods),
+                multiple = FALSE,
+                selected = "Blmngtn"
+              )
+            ),
             column(
               width = 12,
               box
-              (
-                title = h4("Neighborhood Price Distribution"),
-                width = 4,
-                plotOutput("density")
-              ),
+              (width = 6,
+                title = 'Price Distribution of Neighbourhood',
+                plotOutput("density")),
               box
-              (width = 4,
+              (width = 6,
+                title = "Quality by Sq Ft Price",
                 plotOutput("price_qual")),
               box
-              (width = 4,
+              (width = 6,
+                title = "Sq Ft Price by Above Ground Living Area",
                 plotOutput("price_sqft")),
               box
-              (width = 4,
-                plotOutput("buildingtype")),
-              box
-              (width = 4,
-                plotOutput("beds")),
-              box
-              (width = 4,
-                plotOutput("temp"))
+              (width = 6,
+                title = 'Price by House Building Type',
+                plotOutput("buildingtype")
+                )
+              )
             )
-          )),
+          ),
         
         
         
@@ -498,22 +475,21 @@ background: #FFAE66;
           tabName = "Predictions",
           fluidRow
           (
-              box
+            box(
+              title = h5("Neighborhood"),
+              width = 4,
+              selectInput
               (
-                title = h4("Neighborhood"),
-                width = 3,
-                selectInput
-                (
-                  input = "hood_prediction",
-                  label = NULL,
-                  choices = c('All' , hoods),
-                  multiple = FALSE,
-                  selected = "Blmngtn")),
-            
+                input = "hood_prediction",
+                label = NULL,
+                choices = c('All' , hoods),
+                multiple = FALSE,
+                selected = "Blmngtn"
+              )
+            ),
             tabBox(
-              title = h4("House Properties"),
-              width = 3,
-              height = "150px",
+              title = h5("House Properties"),
+              width = 4,
               side = "right",
               id = "houseprop",
               
@@ -522,36 +498,30 @@ background: #FFAE66;
                 title = "Baths",
                 "Select number of Bathrooms",
                 sliderInput(
-                  "FullBath",
+                  "FullBath_prediction",
                   label = NULL,
                   min = 0,
                   max = 5,
                   value = c(0, 5)
                 )
               ),
-              
-              
-              
               tabPanel(
                 title = "Beds",
                 "Select number of bedrooms",
                 sliderInput(
-                  "BedroomAbvGr",
+                  "BedroomAbvGr_prediction",
                   label = NULL,
                   min = 0,
                   max = 5,
                   value = c(0, 5)
                 )
               ),
-              
-              
-              
               tabPanel(
                 title = "Area",
                 "Select desired area",
                 sliderInput
                 (
-                  "GrLivArea",
+                  "GrLivArea_prediction",
                   label = NULL,
                   min = 0,
                   max = 5000,
@@ -560,14 +530,11 @@ background: #FFAE66;
                   round = 2
                 )
               ),
-              
-              
             ),
             
             tabBox(
-              title = h4("Other filters"),
-              width = 3,
-              height = "150px",
+              title = h5("Other filters"),
+              width = 4,
               side = "right",
               id = "houseprop",
               
@@ -575,7 +542,7 @@ background: #FFAE66;
                 title = "Building Type",
                 "Select Buidling Type",
                 checkboxGroupInput(
-                  "BldgType",
+                  "BldgType_prediction",
                   label = NULL,
                   selected = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
                   choiceNames = c(
@@ -593,10 +560,9 @@ background: #FFAE66;
               tabPanel(
                 title = "Year Built",
                 "Select Year Built",
-                width = 12,
                 sliderInput
                 (
-                  "age",
+                  "age_prediction",
                   label = NULL,
                   min = 1870,
                   max = max(house_price$YearBuilt),
@@ -606,31 +572,13 @@ background: #FFAE66;
                 )
               )
             ),
-            
-            
-            
-              
-              
-              box
-              (width = 12,
-                plotOutput("prediction"))
-              
-              
-              
-              
-              
-              
+            box
+            (width = 12,
+              plotOutput("prediction")
+              )
             )
           )
-          
-          
-          
         )
-        
-        
-        
-        
-        
       )
     )
   )
