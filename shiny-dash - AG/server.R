@@ -198,14 +198,11 @@ shinyServer(function(input, output)
   output$price_sqft <- renderPlot({
       ggplot()+
       geom_point(data = df %>%
-                   mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-                   mutate(SFPrice = round(SalePrice / TotSF, 2)),
+                   mutate(SFPrice = round(SalePrice / (TotalBsmtSF + GrLivArea), 2)),
                  aes(x = GrLivArea, y = SFPrice),  color = '#dddddd', alpha = 0.5)+
       geom_point(data = df %>%
-                   mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-                   mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
-                   filter(Neighborhood %in% input$hood_analysis |
-                            input$hood_analysis == "All"),
+                   mutate(SFPrice = round(SalePrice / (TotalBsmtSF + GrLivArea), 2)) %>%
+                   filter(Neighborhood %in% input$hood_analysis),
                  aes(x = GrLivArea, y = SFPrice), color = '#CD7672', size = 3)+
       theme_ipsum() +
       xlim(0, 4000) +
@@ -231,7 +228,7 @@ shinyServer(function(input, output)
       theme_ipsum() +
       labs(x = "Overall Quality", y = "Price Per Sq")
   })
-  
+
   
   
   output$density <- renderPlot({
@@ -241,8 +238,6 @@ shinyServer(function(input, output)
       geom_density(data = df_density, aes(x = SalePriceShort, fill = "#000000"), alpha = 0.5) +
       geom_density(data = df_density %>% filter (Neighborhood %in% input$hood_analysis),
                    aes(x = SalePriceShort, fill = "#ffffff"), alpha = 0.5) +
-      scale_fill_viridis(discrete = TRUE) +
-      scale_color_viridis(discrete = TRUE) +
       theme_ipsum() +
       labs(x = 'SalePrice ($1000 USD)', y = 'Density') +
       scale_fill_manual(
@@ -259,6 +254,39 @@ shinyServer(function(input, output)
       predict = predict + coef[coef$X == paste("BldgType", input$BldgType_prediction, sep='_'),2]
     if (input$hood_prediction != 'Blmngtn')
       predict = predict + coef[coef$X == paste("Neighborhood", input$hood_prediction, sep='_'),2]
-    paste("The predicted price is: $", predict)
+    predict = round(predict,-2)
+    paste("The predicted price is: $", predict, sep = "")
+  })
+  
+  output$prediction_graph <- renderPlot({
+    predict = coef[1:4,2] %*% c(1,input$BedroomAbvGr_prediction,input$FullBath_prediction,input$GrLivArea_prediction)
+    if (input$BldgType_prediction != '1Fam')
+      predict = predict + coef[coef$X == paste("BldgType", input$BldgType_prediction, sep='_'),2]
+    if (input$hood_prediction != 'Blmngtn')
+      predict = predict + coef[coef$X == paste("Neighborhood", input$hood_prediction, sep='_'),2]
+    predict = round(predict,-2)
+    
+    ggplot()+
+      geom_point(data = df,
+                 aes(x = GrLivArea, y = SalePrice),  color = '#dddddd', alpha = 0.5)+
+      geom_point(data = df %>%
+                   filter(Neighborhood == input$hood_prediction &
+                            BedroomAbvGr == input$BedroomAbvGr_prediction &
+                            FullBath >= input$FullBath_prediction &
+                            GrLivArea >= input$GrLivArea_prediction -250 &
+                            GrLivArea <= input$GrLivArea_prediction +250 &
+                            BldgType == input$BldgType_prediction),
+                 aes(x = GrLivArea, y = SalePrice), color = '#EEB462', size = 3, alpha = 1)+
+      
+      geom_point(data = data.frame(GrLivArea = input$GrLivArea_prediction, SalePrice = predict),
+                 aes(x = GrLivArea, y = SalePrice), fill = '#CD7672',  color = '#222222', shape = 22, size = 5, alpha = 1)+
+      geom_text(data = data.frame(GrLivArea = input$GrLivArea_prediction, SalePrice = predict), 
+                 aes(x = GrLivArea, y = SalePrice+30000, label = "Our Prediction"), size = 5)+
+      
+      theme_ipsum() +
+      xlim(0, 3000) +
+      ylim(0,500000) +
+      theme(legend.position = "none") +
+      labs(x = "Above Ground Living Area (Sq Ft)", y = "Historic Sales Price (USD)")
   })
 })

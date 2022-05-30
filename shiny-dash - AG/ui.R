@@ -273,7 +273,7 @@ background: #FFAE66;
                 label = NULL,
                 choices = c('All' , hoods),
                 multiple = TRUE,
-                selected = "NAmes"
+                  selected = "NAmes"
               )
             ),
             
@@ -393,7 +393,7 @@ background: #FFAE66;
                 label = NULL,
                 choices = c(hoods),
                 multiple = FALSE,
-                selected = "Blmngtn"
+                selected = "NAmes"
               )
             ),
             box
@@ -431,7 +431,7 @@ background: #FFAE66;
                 label = NULL,
                 choices = c(hoods),
                 multiple = FALSE,
-                selected = "Blmngtn"
+                selected = "NAmes"
               )
             ),
             box(
@@ -443,7 +443,7 @@ background: #FFAE66;
                 label = NULL,
                 min = 0,
                 max = 5,
-                value = 2
+                value = 1
               )
             ),
             box(
@@ -455,7 +455,7 @@ background: #FFAE66;
                 label = NULL,
                 min = 0,
                 max = 5,
-                value = 2
+                value = 3
               )
             ),
             box(
@@ -468,7 +468,7 @@ background: #FFAE66;
                 label = NULL,
                 min = 0,
                 max = 5000,
-                value = 2000,
+                value = 1200,
                 step = 200,
                 round = 2
               )
@@ -492,17 +492,27 @@ background: #FFAE66;
                 inline = TRUE,
                 selected = "1Fam"
               )
-            ),
+            )
+          ),
+          fluidRow(
             box
             (
               title = "Price Prediction",
-              width = 12,
-              textOutput("prediction")
-              )
+              width = 4,
+              style = "height: 500px",
+              h2(textOutput("prediction"))
+            ),
+            box(
+              title = "Comparison to historic sales",
+              width = 8,
+              style = "height: 500px",
+              plotOutput("prediction_graph")
             )
+          
           )
         )
       )
     )
   )
+)
 
