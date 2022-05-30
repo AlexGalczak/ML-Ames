@@ -62,12 +62,9 @@ shinyServer(function(input, output)
           size = 0.1
         ) +
         
-        
-        
         geom_point(
           data = df %>% filter((Neighborhood %in% input$hood |
                                   input$hood == "All") &
-                                 
                                  SalePrice >= input$price[1] &
                                  SalePrice <= input$price[2] &
                                  BedroomAbvGr >= input$BedroomAbvGr[1] &
@@ -264,5 +261,8 @@ shinyServer(function(input, output)
         name = "Legend",
         labels = c((neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name, "Ames")
       )
+  })
+  output$prediction <- renderPlot({
+    
   })
 })
