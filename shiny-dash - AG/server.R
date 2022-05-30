@@ -216,7 +216,7 @@ shinyServer(function(input, output)
                    mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
                    filter(Neighborhood %in% input$hood_analysis |
                             input$hood_analysis == "All"),
-                 aes(x = GrLivArea, y = SFPrice, color = SFPrice), size = 3)+
+                 aes(x = GrLivArea, y = SFPrice), color = '#CD7672', size = 3)+
       theme_ipsum() +
       xlim(0, 4000) +
       ylim(0,150) +
@@ -240,7 +240,6 @@ shinyServer(function(input, output)
                    color = "#CD7672", fill = "#CD7672", alpha = 0.5) +
       theme_ipsum() +
       labs(x = "Overall Quality", y = "Price Per Sq")
-    
   })
   
   
@@ -249,9 +248,9 @@ shinyServer(function(input, output)
     df_density <- df %>%
       mutate(SalePriceShort = round(SalePrice / 1000), 2)
     ggplot()+
-      geom_density(data = df_density, aes(x = SalePriceShort, fill = "#EEB462"), alpha = 0.6) +
+      geom_density(data = df_density, aes(x = SalePriceShort, fill = "#000000"), alpha = 0.5) +
       geom_density(data = df_density %>% filter (Neighborhood %in% input$hood_analysis),
-                   aes(x = SalePriceShort, fill = "#CD7672"), alpha = 0.6) +
+                   aes(x = SalePriceShort, fill = "#ffffff"), alpha = 0.5) +
       scale_fill_viridis(discrete = TRUE) +
       scale_color_viridis(discrete = TRUE) +
       theme_ipsum() +
@@ -259,7 +258,7 @@ shinyServer(function(input, output)
       scale_fill_manual(
         values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c((neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name, "Ames")
+        labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       )
   })
   output$prediction <- renderPlot({
