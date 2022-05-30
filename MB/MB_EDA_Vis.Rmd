@@ -14,12 +14,11 @@ library(ggmap)
 library(ggExtra)
 library(RColorBrewer)
 
-getwd()
 ```
 
 ```{r loading files, merging datasets}
 getwd()
-house_price <- data.frame(read.csv('data/Ames_HousePrice_cleaned.csv'))
+house_price <- data.frame(read.csv('data/Ames_HousePrice.csv'))
 house_price
 house_price <-  house_price[!house_price$'PID'==908154205, ]
 
@@ -63,7 +62,7 @@ house_price$SalePriceShort
 
 house_price %>% ggplot(aes(x = SalePriceShort)) + 
   geom_histogram(bins = 50, col= "white", fill="#698adb") +
-  geom_density(col = '#698adb') +
+  # geom_density(col = '#698adb') +
   theme_bw() + 
   theme_ipsum() + 
   labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price ($1000 USD)', y='Count') 
@@ -148,11 +147,11 @@ house_price <- house_price %>%
 house_price
 
 house_price %>% 
-  ggplot(aes(x=GrLivArea, y=SFPrice, color=SFPrice)) + 
-  geom_smooth(method=lm) +
-  geom_point() + 
+  ggplot(aes(x=TotSF, y=SFPrice)) + 
+  geom_smooth(method=lm, color = "#264D59") +
+  geom_point(color="#43978D", alpha = 0.5) + 
   theme_ipsum() +
-  labs(title = "Square Foot Price by Above Ground Living Area", x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
+  labs(title = "Square Foot Price", x = "Total Living Area (Sq Ft)", y = "Price Per Sq")
 ```
 
 ```{r  Feature EDA: GrLivArea (above ground living area sq feet)}
@@ -160,12 +159,12 @@ house_price %>%
 class(house_price$GrLivArea)
 
 house_price %>% 
-  ggplot(aes(x=GrLivArea, y=SFPrice, color = SFPrice)) + 
-  geom_point() +
-  geom_smooth(method=lm)+
+  ggplot(aes(x=GrLivArea, y=SalePrice/1000, color = SalePriceShort)) + 
+  geom_point(color="#43978D", alpha = 0.5) +
+  geom_smooth(method=lm, colour = "#264D59")+
   theme_bw()+
   theme_ipsum() +
-  labs(title = "Above Ground Living Area by Sq Ft Price", x ="Above Ground Living Area (Sq Ft)", y='Sq Ft Price')
+  labs(title = "Above Ground Living Area by Sale Price", x ="Above Ground Living Area (Sq Ft)", y='Sale Price ($1000 USD)')
 
 # stronger correlation between living area sq foot and house price than lot area size 
 # size does not look like it's that strong a factor in sq ft price
@@ -184,14 +183,14 @@ house_price %>%
 ```
 
 ```{r  EDA: Neighbourhood and Quality}
-
+options(repr.plot.width = 1, repr.plot.height = 2.5)
 house_price %>% 
   mutate(Neigh = fct_reorder(Neighborhood, SalePrice)) %>% 
   mutate(SalePriceShort = round(SalePrice/1000),2) %>% 
   ggplot(aes(x = SalePriceShort, y = Neigh, fill = ..x..)) +
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
   scale_fill_viridis(name = "House Price", option = "C") +
-  labs(title = 'House Price Distribution by Neighborhood', x = 'Sale Price (Thousand Dollars)', y = 'Neighborhood') +
+  labs(title = 'House Price Distribution by Neighborhood', x = 'Sale Price ($1000 USD)', y = 'Neighborhood') +
   theme_ipsum() +
     theme(
       legend.position="none",
@@ -443,8 +442,82 @@ hood_dummy %>%
    labs(x = 'Bedrooms Above Ground', y='Median Sale Price ($1000 USD)', title = 'Price by Number of Bedrooms', color = 'Neighborhood') +
    scale_fill_manual(values=c("#CD7672", "#EEB462"), name = "Neighborhood", labels = c("All Other Neighborhoods", "Bluestem"))
 ```
+```{r  Heating }
+
+house_price$HeatingQC <- factor(house_price$HeatingQC)
+levels(house_price$HeatingQC)
+levels(house_price$HeatingQC) <- c("Excellent", "Fair", "Good", "Poor", "Avg")
+house_price$HeatingQC <- factor(house_price$HeatingQC, levels = c("Excellent", "Good", "Avg", "Fair", "Poor"))
 
 
+house_price %>% 
+  group_by(HeatingQC) %>%
+  summarise(medheating = median(SalePrice/1000)) %>% 
+  arrange(desc(medheating)) %>% 
+  ggplot(aes(x=HeatingQC, y=medheating)) +
+  geom_col(fill = "#43978D") +
+  theme_bw() +
+  theme_ipsum() +
+  labs(x = "Heating Quality", y="Median Price ($1000 USD)", title = "Price by Heating Quality")
+
+
+```
+
+
+```{r Kitchen Quality }
+
+house_price$KitchenQual <- factor(house_price$KitchenQual)
+class(house_price$KitchenQual)
+
+levels(house_price$KitchenQual)
+levels(house_price$KitchenQual) <- c("Excellent", "Fair", "Good", "Poor", "Avg")
+house_price$KitchenQual <- factor(house_price$KitchenQual, levels = c("Excellent", "Good", "Avg", "Fair", "Poor"))
+
+
+house_price %>% 
+  ggplot(aes(x= KitchenQual, y=SalePrice/1000, group=KitchenQual)) + 
+  geom_boxplot(color="#5a7fdb", fill="#ebae34", alpha=0.3) + 
+  theme_ipsum() + 
+  labs(title = "Price by Kitchen Quality", x = "Kitchen Quality", y = "Sale Price ($1000 USD)")
+
+```
+```{r  Baths }
+
+house_price$FullBath <- factor(house_price$FullBath )
+levels(house_price$FullBath )
+
+house_price %>% 
+  group_by(FullBath) %>%  
+  mutate(bathmedprice = median(SalePrice/1000)) %>% 
+  ggplot(aes(x=FullBath, y=bathmedprice/1000)) + 
+  geom_col(fill = "#CD7672") + 
+  labs(title = "Price by Full Baths", x="Number of Full Baths", y="Median Sale Price ($1000 USD)") + 
+  theme_bw() + 
+  theme_ipsum()
+
+```
+```{r  Fireplaces }
+
+house_price3 <- house_price
+house_price3 <- house_price[!house_price$FireplaceQu == "", ]
+
+house_price3$Fireplaces <- factor(house_price3$Fireplaces)
+
+house_price3$FireplaceQu <- factor(house_price3$FireplaceQu)
+
+levels(house_price3$FireplaceQu)
+levels(house_price3$FireplaceQu) <- c("Excellent", "Fair", "Good", "Poor", "Avg")
+house_price3$FireplaceQu <- factor(house_price3$FireplaceQu, levels = c("Excellent", "Good", "Avg", "Fair", "Poor"))
+
+
+house_price3 %>% 
+  ggplot() + 
+  geom_boxplot(aes(x= FireplaceQu, y=SalePrice/1000, fill = Fireplaces)) + 
+  theme_ipsum() + 
+  labs(title = "Price by Fireplace", x = "Fireplace Quality", y = "Sale Price ($1000 USD)")
+  
+
+```
 
 
 
