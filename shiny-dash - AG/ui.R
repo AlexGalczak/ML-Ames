@@ -429,101 +429,75 @@ background: #FFAE66;
               (
                 input = "hood_prediction",
                 label = NULL,
-                choices = c('All' , hoods),
+                choices = c(hoods),
                 multiple = FALSE,
                 selected = "Blmngtn"
               )
             ),
-            tabBox(
-              title = "House Properties",
-              width = 4,
-              height = "120px",
-              side = "right",
-              id = "houseprop",
-              
-              
-              tabPanel(
-                title = "Baths",
-                "Select number of Bathrooms",
-                sliderInput(
-                  "FullBath_prediction",
-                  label = NULL,
-                  min = 0,
-                  max = 5,
-                  value = c(0, 5)
-                )
-              ),
-              tabPanel(
-                title = "Beds",
-                "Select number of bedrooms",
-                sliderInput(
-                  "BedroomAbvGr_prediction",
-                  label = NULL,
-                  min = 0,
-                  max = 5,
-                  value = c(0, 5)
-                )
-              ),
-              tabPanel(
-                title = "Area",
-                "Select desired area",
-                sliderInput
-                (
-                  "GrLivArea_prediction",
-                  label = NULL,
-                  min = 0,
-                  max = 5000,
-                  value = c(0, 5000),
-                  step = 200,
-                  round = 2
-                )
-              ),
+            box(
+              title = "Baths",
+              width = 2,
+              style = "height:120px",
+              sliderInput(
+                "FullBath_prediction",
+                label = NULL,
+                min = 0,
+                max = 5,
+                value = 2
+              )
             ),
-            
-            tabBox(
-              title = "Other filters",
-              width = 4,
-              height = "120px",
-              side = "right",
-              id = "houseprop",
-              
-              tabPanel(
-                title = "Building Type",
-                "Select Buidling Type",
-                checkboxGroupInput(
-                  "BldgType_prediction",
-                  label = NULL,
-                  selected = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
-                  choiceNames = c(
-                    "Single Family",
-                    "2-Family",
-                    "Duplex",
-                    "Townhouse(Inside)",
-                    "Townhouse(End)"
-                  ),
-                  choiceValues = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
-                  inline = TRUE
-                )
-              ),
-              
-              tabPanel(
-                title = "Year Built",
-                "Select Year Built",
-                sliderInput
-                (
-                  "age_prediction",
-                  label = NULL,
-                  min = 1870,
-                  max = max(house_price$YearBuilt),
-                  value = c(1870, 2010),
-                  sep = "",
-                  step = 5
-                )
+            box(
+              title = "Beds",
+              width = 2,
+              style = "height:120px",
+              sliderInput(
+                "BedroomAbvGr_prediction",
+                label = NULL,
+                min = 0,
+                max = 5,
+                value = 2
+              )
+            ),
+            box(
+              title = "Area",
+              width = 2,
+              style = "height:120px",
+              sliderInput
+              (
+                "GrLivArea_prediction",
+                label = NULL,
+                min = 0,
+                max = 5000,
+                value = 2000,
+                step = 200,
+                round = 2
+              )
+            ),
+            box(
+              title = "Building Type",
+              width = 2,
+              style = "height:120px",
+              radioButtons(
+                "BldgType_prediction",
+                label = NULL,
+                choices  = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                choiceNames = c(
+                  "Single Family",
+                  "2-Family",
+                  "Duplex",
+                  "Townhouse(Inside)",
+                  "Townhouse(End)"
+                ),
+                choiceValues = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                inline = TRUE,
+                selected = "1Fam"
               )
             ),
             box
-            (width = 12,
-              plotOutput("prediction")
+            (
+              title = "Price Prediction",
+              width = 12,
+              textOutput("prediction")
               )
             )
           )

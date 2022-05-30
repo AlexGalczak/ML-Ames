@@ -1,15 +1,5 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output)
 {
   output$Amesmap <-
@@ -261,7 +251,14 @@ shinyServer(function(input, output)
         labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       )
   })
-  output$prediction <- renderPlot({
-    
+  
+  
+  output$prediction <- renderText({
+    predict = coef[1:4,2] %*% c(1,input$BedroomAbvGr_prediction,input$FullBath_prediction,input$GrLivArea_prediction)
+    if (input$BldgType_prediction != '1Fam')
+      predict = predict + coef[coef$X == paste("BldgType", input$BldgType_prediction, sep='_'),2]
+    if (input$hood_prediction != 'Blmngtn')
+      predict = predict + coef[coef$X == paste("Neighborhood", input$hood_prediction, sep='_'),2]
+    paste("The predicted price is: $", predict)
   })
 })
