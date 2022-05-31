@@ -13,7 +13,7 @@ library(hrbrthemes)
 library(ggmap)
 library(ggExtra)
 library(RColorBrewer)
-
+library(ggthemes)
 ```
 
 ```{r loading files, merging datasets}
@@ -44,7 +44,7 @@ house_price %>% ggplot(aes(x = SalePriceShort)) +
   geom_histogram(aes(y=..density..), bins = 50, col= "white", fill="#698adb") +
   geom_density(col = '#698adb') +
   theme_bw() + 
-  theme_ipsum() + 
+  theme_excel_new() + 
   labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price ($1000 USD)', y='Density') 
 
 
@@ -64,7 +64,7 @@ house_price %>% ggplot(aes(x = SalePriceShort)) +
   geom_histogram(bins = 50, col= "white", fill="#698adb") +
   # geom_density(col = '#698adb') +
   theme_bw() + 
-  theme_ipsum() + 
+  theme_excel_new() + 
   labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price ($1000 USD)', y='Count') 
 
 
@@ -88,7 +88,7 @@ house_price %>% ggplot(aes(x = LogSalePrice)) +
   geom_histogram(aes(y=..density..), bins = 50, col= "white", fill="#698adb") +
   geom_density(col = '#698adb') +
   theme_bw() + 
-  theme_ipsum() +
+  theme_excel_new() +
   labs(title = "Log Sale Price Distribution in Ames, Iowa", x = 'Log Sale Price', y='Density',) 
   
 ```

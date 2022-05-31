@@ -167,7 +167,7 @@ shinyServer(function(input, output)
       
       ggplot() +
         geom_bar(data = df_bldg_join, aes(x = BldgType, y = value, fill = variable), width = 0.5, stat = 'identity', position = 'dodge') +
-      theme_ipsum() +
+      theme_excel_new() +
       labs(
         x = 'Building Type',
         y = 'Median Sale Price ($1000 USD)',
@@ -198,7 +198,7 @@ shinyServer(function(input, output)
                    mutate(SFPrice = round(SalePrice / (TotalBsmtSF + GrLivArea), 2)) %>%
                    filter(Neighborhood %in% input$hood_analysis),
                  aes(x = GrLivArea, y = SFPrice), color = '#CD7672', size = 3)+
-      theme_ipsum() +
+      theme_excel_new() +
       xlim(0, 4000) +
       ylim(0,150) +
       theme(legend.position = "none") +
@@ -219,7 +219,7 @@ shinyServer(function(input, output)
                   color = "#222222", fill = "#222222", size = 2, alpha = 0.75) +
       geom_boxplot(data = df_qual %>% filter(Neighborhood %in% input$hood_analysis), aes(x = OverallQual, y = SFPrice),
                    color = "#CD7672", fill = "#CD7672", alpha = 0.5) +
-      theme_ipsum() +
+      theme_excel_new() +
       labs(x = "Overall Quality", y = "Price Per Sq")
   })
 
@@ -232,7 +232,7 @@ shinyServer(function(input, output)
       geom_density(data = df_density, aes(x = SalePriceShort, fill = "#000000"), alpha = 0.5) +
       geom_density(data = df_density %>% filter (Neighborhood %in% input$hood_analysis),
                    aes(x = SalePriceShort, fill = "#ffffff"), alpha = 0.5) +
-      theme_ipsum() +
+      theme_excel_new() +
       labs(x = 'SalePrice ($1000 USD)', y = 'Density') +
       scale_fill_manual(
         values = c("#EEB462", "#CD7672"),
@@ -277,7 +277,7 @@ shinyServer(function(input, output)
       geom_text(data = data.frame(GrLivArea = input$GrLivArea_prediction, SalePrice = predict), 
                  aes(x = GrLivArea, y = SalePrice+30000, label = "Our Prediction"), size = 5)+
       
-      theme_ipsum() +
+      theme_excel_new() +
       xlim(0, 3000) +
       ylim(0,500000) +
       theme(legend.position = "none") +

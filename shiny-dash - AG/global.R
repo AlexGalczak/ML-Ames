@@ -6,6 +6,11 @@ library(shinydashboard)
 library(shinydashboardPlus)
 library(shinyWidgets)
 library(rsconnect)
+library(extrafont)
+library(extrafontdb)
+library(Rttf2pt1)
+library(remotes)
+
 
 
 library(tidyverse)
@@ -22,12 +27,21 @@ library(viridis)
 library(hrbrthemes)
 library(ggExtra)
 library(RColorBrewer)
+library(ggthemes)
+
+
+
+
+
+
+loadfonts(device = "win", quiet = TRUE)
+loadfonts()
+
+windowsFonts()
 
 options(scipen=10000)
 
-rsconnect::setAccountInfo(name='alex-galczak',
-                          token='1A124ABE14710B1080A2F010AC0A0AD2',
-                          secret='k1GH0Xvr7kJ1njDc31+lpN5PWc6FfbQjmwko6DS+')
+
 
 load("ames_mapdata.RData")
 df <- as.data.frame(read.csv("Ames_HousePrice_df.csv"))

@@ -128,8 +128,8 @@ shinyUI(
               ),
               div(
                 class = "text-center",
-                height = "50%",
-                width = "50%",
+                height = "100%",
+                width = "100%",
                 br(),
             
                 h4("Alex Galczak"),
@@ -232,7 +232,7 @@ shinyUI(
               title = userDescription(
                 title = "James",
                 type = 2,
-                image = "image"
+                image = "reno_1x1.jpg"
               ),
               
               div(
