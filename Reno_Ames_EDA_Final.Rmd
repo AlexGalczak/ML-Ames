@@ -5,9 +5,11 @@ date: '2022-05-17'
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# EDA graphs for presentation and Shiny App
+
+I performed my EDA in Python, but reproduced the visualizations in R to match the rest of my team.
+
+These are the final graphs I used in the project presentation.
 
 ```{r}
 
@@ -18,10 +20,6 @@ library(ggplot2)
 theme_set(theme_bw())
 library(MASS)
 
-#install.packages("cowplot")
-library(cowplot)
-#install.packages("corrplot")
-library(corrplot)
 
 ```
 
@@ -34,6 +32,8 @@ ames_Y = read.csv("ML-Ames/data/Ames_Y.csv")
 colnames(ames_X)
 ames_X = ames_X[,-1]
 ames_Y = ames_Y[,-1]
+
+ames_raw = read.csv("Ames_HousePrice.csv")
 ```
 
 
@@ -46,7 +46,7 @@ colnames(ames)
 g = ames %>% mutate(SalePriceShort = round(ames_Y/1000),2) %>% 
   ggplot(aes(x=QualXSF, y=SalePriceShort, size=GrLivArea, color=AgeSold)) +
   geom_point(alpha=0.1)  +
-  labs(x="Quality * Square Feet",y="Sale Price\n($1,000 USD)",  size="Square Feet",color="Age")  +
+  labs(x="Quality * Square Feet",y="Sale Price\n($1,000 USD)", title="Quality * Square Feet vs Sale Price",  size="Square Feet",color="Age")  +
   scale_color_continuous(trans = 'reverse')  + scale_color_gradient(low="#534666", high="#EEB462") +
   scale_x_continuous(labels = scales::comma) + theme_bw() + scale_size_continuous(labels = scales::comma) + geom_smooth(method=lm, se=FALSE, show.legend = FALSE, color = '#534666') + theme_ipsum(base_size=16)
  
@@ -62,14 +62,55 @@ ggsave(
 ames$SalePrice
 ```
 
+```{r scatter quality by age}
+g=ames %>% 
+  ggplot(aes(x=as.factor(OverallQual), y=AgeSold)) +
+  geom_boxplot()  +
+  labs(x="Quality",y="Age", title="Quality vs Age")  + 
+  theme_bw() + theme_ipsum(base_size=16)
+
+ggsave(
+  filename="Quality_by_Age.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+```
+
+```{r square feet by age}
+g = ames_raw %>% mutate(AgeSold = YrSold - YearBuilt) %>% 
+  ggplot(aes(x=GrLivArea, y=AgeSold)) +
+  geom_point()  +
+  labs(x="Square Feet",y="Age", title="Square Feet vs Age")  + 
+  theme_bw() + theme_ipsum(base_size=16) + scale_x_continuous(labels = scales::comma)
+
+ggsave(
+  filename="SF_by_Age.jpeg",
+  plot = g,
+  width = 8.5 - 2,
+  height = (11 - 2) / 2,
+  units = "in",
+  dpi = 300
+)
+```
+
+
 ```{r footprint vs price}
-ames %>% mutate(SalePriceShort = round(ames_Y/1000),2) %>% 
-  ggplot(aes(x=house_footprint, y=SalePriceShort, size=GrLivArea, color=AgeSold)) +
+ames %>% mutate(SalePriceLog = log(ames_Y)) %>% 
+  ggplot(aes(x=house_footprint, y=SalePriceLog, size=GrLivArea, color=AgeSold)) +
   geom_point(alpha=0.1)  +
-  labs(x="House Footprint",y="Sale Price\n($1,000 USD)",  size="Square Feet",color="Age")  +
+  labs(x="House Footprint",y="Log(Sale Price)",  size="Square Feet",color="Age")  +
   scale_color_continuous(trans = 'reverse')  + scale_color_gradient(low="#534666", high="#EEB462") +
   scale_x_continuous(labels = scales::comma) + theme_bw() + scale_size_continuous(labels = scales::comma) + geom_smooth(method=lm, se=FALSE, show.legend = FALSE, color = '#534666') + theme_ipsum(base_size=16)
 ```
+
+
+## Not used.
+
+These three plots were made to illustrate examples of positive, negative, and no relationship in the data as an introduction for realtors who may not know what types of relationships a data team is looking for. Team chose not to include.
+
 
 ```{r positive relationship example}
 
