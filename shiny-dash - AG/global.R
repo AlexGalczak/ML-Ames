@@ -6,10 +6,10 @@ library(shinydashboard)
 library(shinydashboardPlus)
 library(shinyWidgets)
 library(rsconnect)
-library(extrafont)
-library(extrafontdb)
-library(Rttf2pt1)
-library(remotes)
+#library(extrafont)
+#library(extrafontdb)
+#library(Rttf2pt1)
+#library(remotes)
 
 
 
@@ -33,11 +33,6 @@ library(ggthemes)
 
 
 
-
-loadfonts(device = "win", quiet = TRUE)
-loadfonts()
-
-windowsFonts()
 
 options(scipen=10000)
 

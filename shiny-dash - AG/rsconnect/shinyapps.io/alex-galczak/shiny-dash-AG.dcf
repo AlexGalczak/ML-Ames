@@ -5,9 +5,9 @@ account: alex-galczak
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6400354
-bundleId: 5962329
+bundleId: 5962466
 url: https://alex-galczak.shinyapps.io/shiny-dash-AG/
-when: 1653972725.54595
-lastSyncTime: 1653972725.54597
+when: 1653976427.91837
+lastSyncTime: 1653976427.91839
 asMultiple: FALSE
 asStatic: FALSE

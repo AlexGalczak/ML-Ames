@@ -124,7 +124,7 @@ shinyUI(
               title = userDescription(
                 title = "Alex",
                 type = 2,
-                image = "alex2.PNG"
+                image = "alex2.JPG"
               ),
               div(
                 class = "text-center",
