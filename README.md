@@ -1,4 +1,5 @@
-# How to use data to increase the flow of high quality leads to your realty group
+# Price Prediction Model Exploration: Improving Client Experience and Increasing Operational Efficiency
+
 
 ## Background and Motivation
 
@@ -93,23 +94,48 @@ distance to key points around town
 ## Machine Learning Algorithms
 
 We began with 145 features including the original data, one hot encoded categorical features,
-and engineered features. This was initially reduced to 45 through exploratory data analysis, 
-and finally to 32 using Lasso Regression.
+and engineered features. This was initially reduced to 45 through exploratory data analysis.
+And finally to the features were reduced to 32 using Lasso Regression. The data were then 
+split into train (70%) and test groups without stratification. 
 
 ### Multiple Linear Regression
 
+Lasso and Ridge regression were trained on the training data. Grid search with cross 
+validation (3 folds) identified lambda of 0.0032 to be the best and returned an R-squared
+of 0.900.
 
+### Support Vector Regressor
 
-### Support Vector Machine
-
-
-
+A support vector regressor model using a radial basis function kernel and epsilon 
+set to 0.1 and gamma set to 0.01 returned an R-squared of 0.918. Grid search and cross 
+validation with 5 folds returned epsilon of 0.01, gamma unchanged, and C of 1 and a score 
+(R-squared) of 0.916.
 
 ### Random Forest Regression
 
-
+Random forest regression returned an R-squared of 0.898 with 1,000 trees and 7 max 
+features per tree. Grid search with cross validation (5 folds) returned 500 trees, 8 max
+features, and minimum samples per leaf of 1 and 2 per split (R-squared=0.899). Top 
+features in this model were overall quality, exterior quality, 1st floor square feet, 
+garage cars, and number of baths.
 
 ### Gradient Boosting
 
+Gradient boosting with 5,000 trees, a learning rate of 0.01, and 7 max features returned 
+an R-squared of 0.922. While extreme gradient boost with 5,000 trees, a learning rate of 
+0.01, 7 max features, gamma of 0.01, subsample of 0.8, and column sample of 0.8 returned an
+R-squared of 0.923. Top features in this model were overall quality, garage cars, 1st floor
+square feet, kitchen quality, and basement quality.
+
 
 ## Shiny App Development
+
+A web-based [application](https://alex-galczak.shinyapps.io/shiny-dash-AG/) was produced 
+using Shiny in R studio. The application provides the user with an interactive interface to
+explore house prices in Ames by adjusting various characteristics of the house including 
+number of bedrooms, number of bathrooms, square feet, and neighborhood. Descriptive 
+visualizations on the exploratory tab allow users to examine the distribution of price points
+given key characteristics. While the prediction tab allows a price prediction to be returned
+with visual representation of the prediction with the variation represented by other houses
+of similar sizes and characteristics. This demonstrates the functionality and value 
+provided by a paired down house price prediction model.
