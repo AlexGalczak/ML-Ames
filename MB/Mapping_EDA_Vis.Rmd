@@ -116,7 +116,7 @@ Amesmap_hoodprice = ggplot()+
           size = 0.5) +
   xlim(-93.7,-93.57) +
   ylim(41.98,42.08) + 
-  scale_color_gradientn(colours=c("#F9E07F", "#CD7672", "#534666")) + 
+  scale_color_gradientn(colours=c("#348ceb", "#e8c03c", "#fa6180")) + 
   theme(axis.line=element_blank(), 
         axis.text.x=element_blank(), 
           axis.text.y=element_blank(),
