@@ -129,3 +129,13 @@ square feet, kitchen quality, and basement quality.
 
 
 ## Shiny App Development
+
+A web-based [application](https://alex-galczak.shinyapps.io/shiny-dash-AG/) was produced 
+using Shiny in R studio. The application provides the user with an interactive interface to
+explore house prices in Ames by adjusting various characteristics of the house including 
+number of bedrooms, number of bathrooms, square feet, and neighborhood. Descriptive 
+visualizations on the exploratory tab allow users to examine the distribution of price points
+given key characteristics. While the prediction tab allows a price prediction to be returned
+with visual representation of the prediction with the variation represented by other houses
+of similar sizes and characteristics. This demonstrates the functionality and value 
+provided by a paired down house price prediction model.
