@@ -1,15 +1,5 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output)
 {
   output$Amesmap <-
@@ -62,12 +52,9 @@ shinyServer(function(input, output)
           size = 0.1
         ) +
         
-        
-        
         geom_point(
           data = df %>% filter((Neighborhood %in% input$hood |
                                   input$hood == "All") &
-                                 
                                  SalePrice >= input$price[1] &
                                  SalePrice <= input$price[2] &
                                  BedroomAbvGr >= input$BedroomAbvGr[1] &
@@ -75,7 +62,12 @@ shinyServer(function(input, output)
                                  FullBath >= input$FullBath[1] &
                                  FullBath <= input$FullBath[2] &
                                  GrLivArea >= input$GrLivArea[1] &
-                                 GrLivArea <= input$GrLivArea[2]
+                                 GrLivArea <= input$GrLivArea[2] &
+                                 (BldgType %in% input$BldgType |
+                                    input$BldgType == "All") &
+                                 YearBuilt >= input$YearBuilt[1] &
+                                 YearBuilt <= input$YearBuilt[2] 
+                          
           ),
           aes(x = Longitude, y = Latitude, color = Neighborhood),
           alpha = 1,
@@ -149,21 +141,7 @@ shinyServer(function(input, output)
     dashboardBadge(side, color = "blue")
   })
   
-  output$active_side_3 <- renderUI({
-    side <- if (input$myflipbox3)
-      "front"
-    else
-      "back"
-    dashboardBadge(side, color = "blue")
-  })
-  
-  output$active_side_4 <- renderUI({
-    side <- if (input$myflipbox4)
-      "front"
-    else
-      "back"
-    dashboardBadge(side, color = "blue")
-  })
+
   
   observeEvent(input$toggle, {
     updateFlipBox("myflipbox")
@@ -173,113 +151,136 @@ shinyServer(function(input, output)
   })
   
   output$buildingtype <- renderPlot({
-    df %>%
-      group_by(Neighborhood, BldgType) %>%
-      summarise(MedianPrice = median(SalePrice / 1000)) %>%
-      arrange(desc(MedianPrice)) %>%
-      mutate(BldgType = factor(BldgType)) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All") %>%
+    
+    df_bldg <- df %>%
+      group_by(BldgType) %>%
+      summarise(MedianPrice = median(SalePrice / 1000))
+    
+    df_bldg_sel <- df %>%
+      filter(Neighborhood %in% input$hood_analysis) %>%
+      group_by(BldgType) %>%
+      summarise(MedianPrice_sel = median(SalePrice / 1000))
       
-      ggplot(aes(
-        x = BldgType,
-        y = MedianPrice,
-        fill = input$hood_analysis
-      )) +
-      geom_bar(position = position_dodge2(preserve = 'single'), stat = 'identity') +
-      theme_bw() +
-      theme_ipsum() +
+    df_bldg_join <- df_bldg %>%
+      left_join(df_bldg_sel) %>%
+      melt(id.vars='BldgType')
+      
+      ggplot() +
+        geom_bar(data = df_bldg_join, aes(x = BldgType, y = value, fill = variable), width = 0.5, stat = 'identity', position = 'dodge') +
+      theme_pander() +
       labs(
         x = 'Building Type',
         y = 'Median Sale Price ($1000 USD)',
-        title = 'Price by House Building Type',
         color = 'Neighborhood'
       ) +
       scale_fill_manual(
-        values = c("#264D59", "#138086", "#43978D", "#63C0B5", "#90D1C9"),
+        values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c("All Other Neighborhoods", "Bluestem")
+        labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       ) +
+        scale_x_discrete("Building Type", 
+                         breaks = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"), 
+                         labels=c("Single Family","2-Family", "Duplex", "Townhouse(Inside)","Townhouse(End)")) +
       theme(axis.text.x = element_text(
         size = 11,
         angle = 30,
         vjust = .8,
         hjust = 0.8
       ))
-    
-    
-    
   })
   
   output$price_sqft <- renderPlot({
-    df %>%
-      mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-      relocate(TotSF, .after = GrLivArea) %>%
-      mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
-      relocate(SFPrice, .after = SalePrice) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All") %>%
-      ggplot(aes(x = GrLivArea, y = SFPrice, color = SFPrice)) +
-      geom_point() +
-      theme_ipsum() +
-      xlim(0, 8000) +
+      ggplot()+
+      geom_point(data = df %>%
+                   mutate(SFPrice = round(SalePrice / (TotalBsmtSF + GrLivArea), 2)),
+                 aes(x = GrLivArea, y = SFPrice),  color = '#dddddd', alpha = 0.5)+
+      geom_point(data = df %>%
+                   mutate(SFPrice = round(SalePrice / (TotalBsmtSF + GrLivArea), 2)) %>%
+                   filter(Neighborhood %in% input$hood_analysis),
+                 aes(x = GrLivArea, y = SFPrice), color = '#CD7672', size = 3)+
+      theme_pander() +
+      xlim(0, 4000) +
+      ylim(0,150) +
       theme(legend.position = "none") +
-      labs(title = "Square Foot Price by Above Ground Living Area",
-           x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
+      labs(x = "Above Ground Living Area (Sq Ft)", y = "Price Per Sq")
     
   })
   
   output$price_qual <- renderPlot({
-    df %>%
+    df_qual <- df %>%
       mutate(TotSF = TotalBsmtSF + GrLivArea) %>%
-      relocate(TotSF, .after = GrLivArea) %>%
       mutate(SFPrice = round(SalePrice / TotSF, 2)) %>%
-      relocate(SFPrice, .after = SalePrice) %>%
-      mutate(OverallQual = as.factor(OverallQual)) %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All")  %>%
-      ggplot(aes(x = OverallQual, y = SFPrice)) +
-      geom_boxplot(color = "#5a7fdb",
-                   fill = "#ebae34",
-                   alpha = 0.3) +
-      theme_ipsum() +
-      labs(title = "Quality by Sq Ft Price", x = "Overall Quality", y = "Price Per Sq")
+      mutate(OverallQual = as.factor(OverallQual))
     
+      ggplot() +
+      geom_jitter(data = df_qual, aes(x = OverallQual, y = SFPrice),
+                  color = '#dddddd', alpha = 0.5) +
+      geom_jitter(data = df_qual %>% filter(Neighborhood %in% input$hood_analysis), aes(x = OverallQual, y = SFPrice),
+                  color = "#222222", fill = "#222222", size = 2, alpha = 0.75) +
+      geom_boxplot(data = df_qual %>% filter(Neighborhood %in% input$hood_analysis), aes(x = OverallQual, y = SFPrice),
+                   color = "#CD7672", fill = "#CD7672", alpha = 0.5) +
+      theme_pander() +
+      labs(x = "Overall Quality", y = "Price Per Sq")
   })
-  
+
   
   
   output$density <- renderPlot({
-    df %>%
-      filter(Neighborhood %in% input$hood_analysis |
-               input$hood_analysis == "All")  %>%
-      mutate(SalePriceShort = round(SalePrice / 1000), 2) %>%
-      
-      ggplot(aes(
-        x = SalePriceShort,
-        group = c(
-          Neighborhood %in% input$hood_analysis &
-            Neighborhood == "All"
-        ),
-        fill = c(
-          Neighborhood %in% input$hood_analysis &
-            Neighborhood == "All"
-        )
-      )) +
-      geom_density(adjust = 1.5, alpha = 0.6) +
-      scale_fill_viridis(discrete = TRUE) +
-      scale_color_viridis(discrete = TRUE) +
-      theme_ipsum() +
-      #xlim(0, 4000) +
-      labs(x = 'SalePrice ($1000 USD)', y = 'Density', title = 'Price Distribution of Neighbourhood') +
+    df_density <- df %>%
+      mutate(SalePriceShort = round(SalePrice / 1000), 2)
+    ggplot()+
+      geom_density(data = df_density, aes(x = SalePriceShort, fill = "#000000"), alpha = 0.5) +
+      geom_density(data = df_density %>% filter (Neighborhood %in% input$hood_analysis),
+                   aes(x = SalePriceShort, fill = "#ffffff"), alpha = 0.5) +
+      theme_pander() +
+      labs(x = 'SalePrice ($1000 USD)', y = 'Density') +
       scale_fill_manual(
         values = c("#EEB462", "#CD7672"),
         name = "Legend",
-        labels = c(input$hood_analysis, input$hood_analysis == "All")
+        labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       )
-    
   })
   
   
+  output$prediction <- renderText({
+    predict = coef[1:4,2] %*% c(1,input$BedroomAbvGr_prediction,input$FullBath_prediction,input$GrLivArea_prediction)
+    if (input$BldgType_prediction != '1Fam')
+      predict = predict + coef[coef$X == paste("BldgType", input$BldgType_prediction, sep='_'),2]
+    if (input$hood_prediction != 'Blmngtn')
+      predict = predict + coef[coef$X == paste("Neighborhood", input$hood_prediction, sep='_'),2]
+    predict = round(predict,-2)
+    paste("The predicted price is: $", predict, sep = "")
+  })
   
+  output$prediction_graph <- renderPlot({
+    predict = coef[1:4,2] %*% c(1,input$BedroomAbvGr_prediction,input$FullBath_prediction,input$GrLivArea_prediction)
+    if (input$BldgType_prediction != '1Fam')
+      predict = predict + coef[coef$X == paste("BldgType", input$BldgType_prediction, sep='_'),2]
+    if (input$hood_prediction != 'Blmngtn')
+      predict = predict + coef[coef$X == paste("Neighborhood", input$hood_prediction, sep='_'),2]
+    predict = round(predict,-2)
+    
+    ggplot()+
+      geom_point(data = df,
+                 aes(x = GrLivArea, y = SalePrice),  color = '#dddddd', alpha = 0.5)+
+      geom_point(data = df %>%
+                   filter(Neighborhood == input$hood_prediction &
+                            BedroomAbvGr == input$BedroomAbvGr_prediction &
+                            FullBath >= input$FullBath_prediction &
+                            GrLivArea >= input$GrLivArea_prediction -250 &
+                            GrLivArea <= input$GrLivArea_prediction +250 &
+                            BldgType == input$BldgType_prediction),
+                 aes(x = GrLivArea, y = SalePrice), color = '#EEB462', size = 3, alpha = 1)+
+      
+      geom_point(data = data.frame(GrLivArea = input$GrLivArea_prediction, SalePrice = predict),
+                 aes(x = GrLivArea, y = SalePrice), fill = '#CD7672',  color = '#222222', shape = 22, size = 5, alpha = 1)+
+      geom_text(data = data.frame(GrLivArea = input$GrLivArea_prediction, SalePrice = predict), 
+                 aes(x = GrLivArea, y = SalePrice+30000, label = "Our Prediction"), size = 5)+
+      
+      theme_pander() +
+      xlim(0, 3000) +
+      ylim(0,500000) +
+      theme(legend.position = "none") +
+      labs(x = "Above Ground Living Area (Sq Ft)", y = "Historic Sales Price (USD)")
+  })
 })

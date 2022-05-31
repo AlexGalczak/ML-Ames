@@ -15,15 +15,19 @@ library(ggExtra)
 library(RColorBrewer)
 library(zoom)
 library(ggforce)
+library(ggrepel)
 ```
 
 
 ```{r  Load DF}
-
 hp <- read.csv('../data/Ames_HousePrice_Address.csv')
+nbhd <- as.data.frame(read.csv('../data/Ames_HousePrice_nbhd.csv'))
 
 hp <- hp %>% 
   mutate(Age = YrSold - YearBuilt)
+
+hp$SalePriceShort <- round(hp$SalePrice/1000,2)
+
 
 range(hp$Age)
 
@@ -86,12 +90,12 @@ Amesmap_hoodprice = ggplot()+
   geom_sf(data = city$osm_multipolygons,
           color = "#ffffff",
           fill = "#e6e6e6",
-          alpha = 0.5) +
+          alpha = 0.4) +
   geom_sf(data = park$osm_polygons,
           color = "#ffffff",
           fill = "#acc388",
           size = 0,
-          alpha = 0.5) +
+          alpha = 0.3) +
   geom_sf(data = water$osm_multipolygons,
           color = "#B2E3EA",
           fill = "#B2E3EA",
@@ -101,7 +105,7 @@ Amesmap_hoodprice = ggplot()+
           color = "#EAD7AF",
           fill = "#EAD7AF",
           size = 0.5,
-          alpha = 0.5) +
+          alpha = 0.3) +
   geom_sf(data = road_primary$osm_lines,
           color = "#ebba76",
           alpha = 1,
@@ -112,7 +116,7 @@ Amesmap_hoodprice = ggplot()+
           size = 0.5) +
   xlim(-93.7,-93.57) +
   ylim(41.98,42.08) + 
-  scale_color_gradientn(colours=c("#534666", "#CD7672", "#EEB462")) + 
+  scale_color_gradientn(colours=c("#348ceb", "#e8c03c", "#fa6180")) + 
   theme(axis.line=element_blank(), 
         axis.text.x=element_blank(), 
           axis.text.y=element_blank(),
@@ -123,8 +127,13 @@ Amesmap_hoodprice = ggplot()+
           panel.border=element_blank(),
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank()) + 
-  geom_point(data= hp, aes(x=Longitude, y=Latitude, colour=SalePrice),
-             alpha = 0.6, size = 0.1) 
+  geom_point(data= hp, aes(x=Longitude, y=Latitude, color=SalePriceShort),
+             alpha = 0.5, size = 0.35) + 
+          geom_text_repel(data = nbhd, aes(x = Longitude, y = Latitude, label=Name), size = 2.5, color = "#333333") + 
+  labs(color = 'Sale Price \n($1000 USD)') + 
+  guides(shape = guide_legend(override.aes = list(size = 0.5))) + 
+  theme(legend.title = element_text(size = 9), legend.text = element_text(size = 9))
+
 
 Amesmap_hoodprice
 

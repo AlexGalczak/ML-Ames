@@ -1,0 +1,13 @@
+name: shiny-dash-AG2
+title: shiny-dash-AG2
+username:
+account: alex-galczak
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6401642
+bundleId: 5962444
+url: https://alex-galczak.shinyapps.io/shiny-dash-AG2/
+when: 1653975815.02457
+lastSyncTime: 1653975815.02459
+asMultiple: FALSE
+asStatic: FALSE
