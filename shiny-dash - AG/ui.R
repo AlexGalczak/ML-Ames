@@ -53,14 +53,44 @@ shinyUI(
           
           
           fluidRow(
-            column(width = 6,
+            column(width = 4,
                    box(
                      class = "text-left",
-                     title = "Price Prediction Model Exploration",
+                     title = "Machine Learning Process",
                      img(
-                       src = "Screenshot 2022-05-28 204005.jpg",
-                       width = "80%",
+                       src = "ML.png",
+                       width = "100%",
                        height = "80%"
+                     ),
+                     width = 12,
+                     style = "height:500px"
+                   )),
+            
+            column(width = 3,
+                   box(
+                     class = "text-left",
+                     title = "Shiny App Development",
+                     div(
+                       class = "text-left",
+                       width = "100%",
+                       p(
+                         "A web-based application was produced using Shiny in R studio. 
+                         The application provides the user with an interactive interface 
+                         to explore house prices in Ames by adjusting various characteristics 
+                         of the house including number of bedrooms, number of bathrooms, 
+                         square feet, and neighborhood. Descriptive visualizations on the 
+                         exploratory tab allow users to examine the distribution of price points 
+                         given key characteristics. While the prediction tab allows a price 
+                         prediction to be returned with visual representation of the prediction 
+                         with the variation represented by other houses of similar sizes and 
+                         characteristics. This demonstrates the functionality and value provided 
+                         by a paired down house price prediction model."
+                       ),
+                       
+                     #img(
+                       #src = "Screenshot 2022-05-28 204005.jpg",
+                       #width = "80%",
+                       #height = "80%"
                      ),
                      width = 12,
                      style = "height:500px"
@@ -82,7 +112,7 @@ shinyUI(
                        front = div(
                          class = "text-center",
                          width = "100%",
-                         img(src = "Ames_Montage.JPG",
+                         img(src = "Ames_Montage.jpg",
                              width = "80%")
                        ),
                        back = div(
@@ -117,14 +147,14 @@ shinyUI(
 
 
  
-            column(width = 3,
+            column(width = 2,
               userBox(
               width = 12,
               collapsed = TRUE,
               title = userDescription(
                 title = "Alex",
                 type = 2,
-                image = "alex2.JPG"
+                image = "alex2.jpg"
               ),
               div(
                 class = "text-center",
@@ -196,7 +226,7 @@ shinyUI(
               title = userDescription(
                 title = "Michelle",
                 type = 2,
-                image = "MB.PNG"
+                image = "MB.png"
               ),
               
               div(
