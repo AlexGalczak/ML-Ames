@@ -7,12 +7,13 @@ shinyUI(
     skin = "yellow",
     
     dashboardHeader(title = "AMES, IA"),
+    
+
+# Menu Items in the Sidebar -----------------------------------------------
+
+    
     dashboardSidebar(sidebarMenu(
-      menuItem(
-        "Info",
-        tabName = "Info",
-        icon = icon("info", lib = "font-awesome")
-      ),
+
       menuItem(
         "Map",
         tabName = "Map",
@@ -27,239 +28,251 @@ shinyUI(
         "Predictions",
         tabName = "Predictions",
         icon = icon("dollar-sign", lib = "font-awesome")
+      ),
+      menuItem(
+        "Info",
+        tabName = "Info",
+        icon = icon("info", lib = "font-awesome")
       )
     )),
+
+
+
     dashboardBody(
-      tags$head(
-        tags$style(
-          HTML(
-            '
-      .main-header .logo {
-        font-family: "Helvetica", "Roboto", "Arial", san-serif;
-        font-weight: medium;
-        font-size: 24px;
-        }
 
 
-      .box.box-solid.box-danger>.box-header {
-        color:#9966ff;
-        background:#9966ff
-        }
+# Information page - Info tab from side bar -------------------------------
 
-.box.box-solid.box-danger{
-border-bottom-color:#534666;
-border-left-color:#534666;
-border-right-color:#534666;
-border-top-color:#534666;
-}
-
-.box.box-danger>.box-header {
-  color:#fff;
-  background:#534666
-                    }
-
-.box.box-danger{
-border-bottom-color:#534666;
-border-left-color:#534666;
-border-right-color:#534666;
-border-top-color:#534666;
-#background: #FFFFFF;
-}
-
-.box.box-solid.box-info>.box-header {
-  color:#000000;
-  background:#534666
-                    }
-
-.box.box-solid.box-info{
-border-bottom-color:#FFAE66;
-border-left-color:#FFAE66;
-border-right-color:#FFAE66;
-border-top-color:#FFAE66;
-}
-
-.box.box-info>.box-header {
-  color:#fff;
-  background:#534666
-                    }
-
-.box.box-info{
-border-bottom-color:#FFAE66;
-border-left-color:#FFAE66;
-border-right-color:#FFAE66;
-border-top-color:#FFAE66;
-background: #FFAE66;
-}
-
-    ')
-        )
-      ),
-      
-      #info box
       tabItems(
         tabItem(
           tabName = "Info",
-          #h2("Ames, IOWA"),
+
+
+# Info Section about ML ---------------------------------------------------
+
+          
           
           fluidRow(
-            box
-            (
-              class = "text-left",
-              title = "MACHINE LEARNING = THE FUTURE OF REAL ESTATE",
-              img(
-                src = "Screenshot 2022-05-28 204005.jpg",
-                width = "80%"
-              ),
-              width = 9,
-              style = "height:500px"
-            ),
+            column(width = 6,
+                   box(
+                     class = "text-left",
+                     title = "Price Prediction Model Exploration",
+                     img(
+                       src = "Screenshot 2022-05-28 204005.jpg",
+                       width = "80%",
+                       height = "80%"
+                     ),
+                     width = 12,
+                     style = "height:500px"
+                   )),
             
-            box(
-              width = 3,
-              style = "height:500px",
-              title = "Ames, Iowa",
-              flipBox(
-                id = "myflipbox2",
-                width = 12,
-                front = div(
-                  class = "text-center",
-                  width = "100%",
-                  img(
-                    src = "Ames_Montage.JPG",
-                    width = "80%"
-                  )
-                ),
-                back = div(
-                  class = "text-left",
-                  width = "100%",
-                  p(
-                    "Ames (/eɪmz/) is a city in Story County, Iowa, United States, located approximately 30 miles (48 km) north of
+            
+
+# Info Section about AMES -------------------------------------------------
+
+            
+            column(width = 3,
+                   box(
+                     width = 12,
+                     style = "height:500px",
+                     title = "Ames, Iowa",
+                     flipBox(
+                       id = "myflipbox2",
+                       width = 12,
+                       front = div(
+                         class = "text-center",
+                         width = "100%",
+                         img(src = "Ames_Montage.JPG",
+                             width = "80%")
+                       ),
+                       back = div(
+                         class = "text-left",
+                         width = "100%",
+                         p(
+                           "Ames (/eɪmz/) is a city in Story County, Iowa, United States, located approximately 30 miles (48 km) north of
                     Des Moines in central Iowa. It is best known as the home of Iowa State University (ISU), with
                     leading agriculture, design, engineering, and veterinary medicine colleges. A United States Department of Energy national laboratory,
-                    Ames Laboratory, is located on the ISU campus."),
-                  br(),
-                  p("According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.
+                    Ames Laboratory, is located on the ISU campus."
+                         ),
+                         br(),
+                         p(
+                           "According to the 2020 census, Ames had a population of 66,427, making it the state's ninth largest city.
                     Iowa State University was home to 33,391 students as of fall 2019, which make up approximately one half of
-                    the city's population."),
-                  # br(),
-                  # p("Ames also hosts United States Department of Agriculture (USDA) sites: the largest federal animal disease center
-                  #   in the United States, USDA's Agricultural Research Service's National Animal Disease Center (NADC), as well as,
-                  #   one of two national USDA sites for the Animal and Plant Health Inspection Service (APHIS), which comprises the National
-                  #   Veterinary Services Laboratory and the Center for Veterinary Biologics. Ames also hosts the headquarters for the Iowa
-                  #   Department of Transportation.")
-                  )
-                )
-              )
-            ),
-          
-          fluidRow(
-            userBox(
-              width = 3,
+                    the city's population."
+                         ),
+                         
+                       )
+                     )
+                   )
+                   ),
+
+
+
+
+
+# Info Section about the team ---------------------------------------------
+
+# Info about Alex ---------------------------------------------------------
+
+
+
+ 
+            column(width = 3,
+              userBox(
+              width = 12,
+              collapsed = TRUE,
               title = userDescription(
                 title = "Alex",
-                type = 1,
-                image = "alex_crop.JPG"
+                type = 2,
+                image = "alex2.PNG"
               ),
               div(
-                class = "text-left",
-                height = "100%",
-                width = "100%",
+                class = "text-center",
+                height = "50%",
+                width = "50%",
+                br(),
+            
                 h4("Alex Galczak"),
                 h6("Data Science Fellow"),
-                p(
-                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj"
+                div(
+                  class = "text-center",
+                  a(href = 'https://github.com/AlexGalczak',
+                    
+                    icon("fab fa-github", lib = "font-awesome"),
+                    "GitHub",
+                    title = "GitHub"), br(),
+                  a(href = 'https://www.linkedin.com/in/aleksandragalczak/',
+                    icon("fab fa-linkedin", lib = "font-awesome"),
+                    "LinkedIn",
+                    title = "LinkedIn")
                 )
+
               )
-              #footer = FALSE
             ),
+
+
+# Info about Chad ---------------------------------------------------------
+
+
             
             userBox(
-              width = 3,
+              width = 12,
+              collapsed = TRUE,
               title = userDescription(
                 title = "Chad",
-                type = 1,
+                type = 2,
                 image = "chad.png"
               ),
               div(
-                class = "text-left",
+                class = "text-center",
                 height = "100%",
                 width = "100%",
-                h4("Chad Loh"),
-                h6("Data Science Fellow"),
-                p(
-                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj"
-                )
+                br(),
+                h4("Chad Loh"), 
+                h6("Data Science Fellow")),
+              div(
+                class = "text-center",
+                a(href = 'https://github.com/chadloh',
+                  
+                  icon("fab fa-github", lib = "font-awesome"),
+                  "GitHub",
+                  title = "GitHub"), br(),
+                a(href = 'https://www.linkedin.com/in/chadloh',
+                  icon("fab fa-linkedin", lib = "font-awesome"),
+                  "LinkedIn",
+                  title = "LinkedIn")
               )
-              #footer = FALSE
             ),
+
+
+# Info about Michelle -----------------------------------------------------
+
+
             
             
             userBox(
-              width = 3,
+              width = 12,
+              collapsed = TRUE,
               title = userDescription(
                 title = "Michelle",
-                type = 1,
-                image = "IMG_4575.JPG"
+                type = 2,
+                image = "MB.PNG"
               ),
               
               div(
-                class = "text-left",
+                class = "text-center",
                 height = "100%",
                 width = "100%",
+                br(),
                 h4("Michelle Bui"),
                 h6("Data Science Fellow"),
-                p(
-                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj"
+                div(
+                  class = "text-center",
+                  a(href = 'https://github.com/mb3005',
+                    
+                    icon("fab fa-github", lib = "font-awesome"),
+                    "GitHub",
+                    title = "GitHub"), br(),
+                  a(href = 'https://www.linkedin.com/in/michellebui3005/',
+                    icon("fab fa-linkedin", lib = "font-awesome"),
+                    "LinkedIn",
+                    title = "LinkedIn")
                 )
+
               )
-              #footer = FALSE
             ),
-            
-            
+
+
+
+# Info about James --------------------------------------------------------
+
             userBox(
-              width = 3,
+              width = 12,
+              collapsed = TRUE,
               title = userDescription(
                 title = "James",
-                type = 1,
+                type = 2,
                 image = "image"
               ),
               
               div(
-                class = "text-left",
+                class = "text-center",
                 height = "100%",
                 width = "100%",
+                br(),
                 h4("James Reno"),
                 h6("Data Science Fellow"),
-                p(
-                  "Brief Description lslajdkahfkdafsjflksjlckjsljc
-                        jdflksjflksjfljkslkjfclks
-                        jflsjflksjflkjsjf
-                        fslkjfdlksjflksj
-                        sjflkdjflksfjlj"
-                )
+                div(
+                  class = "text-center",
+                  a(href = 'https://github.com/jamesreno2',
+                    
+                    icon("fab fa-github", lib = "font-awesome"),
+                    "GitHub",
+                    title = "GitHub"), br(),
+                  a(href = 'https://www.linkedin.com/in/jamesmichaelreno/',
+                    icon("fab fa-linkedin", lib = "font-awesome"),
+                    "LinkedIn",
+                    title = "LinkedIn")
+                ))
+
               )
-              #footer = FALSE
             )
           )
         ),
         
+
+
+# Map page - Map tab from sidebar -----------------------------------------
+
+
+# Reactive input boxes ----------------------------------------------------
+
+
+
         
         tabItem
         (
           tabName = "Map",
-          
           fluidRow(
             box
             (
@@ -336,15 +349,15 @@ background: #FFAE66;
                 checkboxGroupInput(
                   "BldgType",
                   label = NULL,
-                  selected = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
-                  choiceNames = c(
+                  selected = c("All"),
+                  choiceNames = c( "All",
                     "Single Family",
                     "2-Family",
                     "Duplex",
                     "Townhouse(Inside)",
                     "Townhouse(End)"
                   ),
-                  choiceValues = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                  choiceValues = c("All","1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
                   inline = TRUE
                 )
               ),
@@ -355,7 +368,7 @@ background: #FFAE66;
                 width = 12,
                 sliderInput
                 (
-                  "age",
+                  "YearBuilt",
                   label = NULL,
                   min = 1870,
                   max = max(house_price$YearBuilt),
@@ -366,23 +379,34 @@ background: #FFAE66;
               )
             ),
             
+
+# Reactive output map -----------------------------------------------------
+
+            
+            
             
             fluidRow
             (
               box
               (
-                girafeOutput("Amesmap", width = "90%", height = "90%"),
+                girafeOutput("Amesmap", width = "75%", height = "75%"),
                 width = 12
               )
             )
           )
         ),
         
+# Analysis page - Analysis tab from sidebar --------------------------------
         
         tabItem
         (tabName = "Analysis",
           fluidRow
           (
+            
+
+# Reactive input box  -----------------------------------------------------
+
+            
             box
             (
               title = "Neighborhood",
@@ -396,9 +420,15 @@ background: #FFAE66;
                 selected = "NAmes"
               )
             ),
+            
+            
+
+# Reactive output graphs --------------------------------------------------
+
+            
             box
             (width = 6,
-              title = 'Price Distribution of Neighbourhood',
+              title = 'Price Distribution of Neighborhood',
               plotOutput("density")),
             box
             (width = 6,
@@ -417,9 +447,20 @@ background: #FFAE66;
           ),
         
         
+
+# Predictions page - Predictions tab from sidebar -------------------------
+
+        
+        
+        
         tabItem(
           tabName = "Predictions",
           fluidRow
+          
+
+# reactive input boxes ----------------------------------------------------
+
+          
           (
             box(
               title = "Neighborhood",
@@ -480,7 +521,7 @@ background: #FFAE66;
               radioButtons(
                 "BldgType_prediction",
                 label = NULL,
-                choices  = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
+                #choices  = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"),
                 choiceNames = c(
                   "Single Family",
                   "2-Family",
@@ -494,6 +535,11 @@ background: #FFAE66;
               )
             )
           ),
+
+
+# Reactive outputs --------------------------------------------------------
+
+
           fluidRow(
             box
             (

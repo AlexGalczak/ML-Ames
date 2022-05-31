@@ -62,7 +62,12 @@ shinyServer(function(input, output)
                                  FullBath >= input$FullBath[1] &
                                  FullBath <= input$FullBath[2] &
                                  GrLivArea >= input$GrLivArea[1] &
-                                 GrLivArea <= input$GrLivArea[2]
+                                 GrLivArea <= input$GrLivArea[2] &
+                                 (BldgType %in% input$BldgType |
+                                    input$BldgType == "All") &
+                                 YearBuilt >= input$YearBuilt[1] &
+                                 YearBuilt <= input$YearBuilt[2] 
+                          
           ),
           aes(x = Longitude, y = Latitude, color = Neighborhood),
           alpha = 1,
@@ -136,21 +141,7 @@ shinyServer(function(input, output)
     dashboardBadge(side, color = "blue")
   })
   
-  output$active_side_3 <- renderUI({
-    side <- if (input$myflipbox3)
-      "front"
-    else
-      "back"
-    dashboardBadge(side, color = "blue")
-  })
-  
-  output$active_side_4 <- renderUI({
-    side <- if (input$myflipbox4)
-      "front"
-    else
-      "back"
-    dashboardBadge(side, color = "blue")
-  })
+
   
   observeEvent(input$toggle, {
     updateFlipBox("myflipbox")
@@ -187,6 +178,9 @@ shinyServer(function(input, output)
         name = "Legend",
         labels = c("Ames", (neighborhoods %>% filter(Neighborhood == input$hood_analysis))$Name)
       ) +
+        scale_x_discrete("Building Type", 
+                         breaks = c("1Fam", "2fmCon", "Duplex", "Twnhs", "TwnhsE"), 
+                         labels=c("Single Family","2-Family", "Duplex", "Townhouse(Inside)","Townhouse(End)")) +
       theme(axis.text.x = element_text(
         size = 11,
         angle = 30,
