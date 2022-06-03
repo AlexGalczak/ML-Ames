@@ -60,7 +60,7 @@ shinyUI(
                      img(
                        src = "ML.png",
                        width = "100%",
-                       height = "80%"
+                       height = "70%"
                      ),
                      width = 12,
                      style = "height:500px"
