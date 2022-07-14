@@ -139,6 +139,7 @@ Amesmap_hoodprice = ggplot()+
 Amesmap_hoodprice
 
 ```
+
 ```{r  Neighborhood Boundary Zoomed Map }
 
 
@@ -194,19 +195,37 @@ Amesmap_hood
 ```
 
 ```{r  Leaflet Map }
+# load data 
+load(file='../data/ames_geo.rda') 
+head(ames_geo)
 
-m <- leaflet() %>% 
+
+# Mapping Ames 
+m <- leaflet(ames_geo) %>% 
   addProviderTiles(providers$CartoDB.Positron) %>% 
   setView(lng=-93.626307, lat=42.025318, zoom=12.5) %>% 
   addMarkers(lng=-93.645829, lat=42.026841,
+             popup="Iowa State University",
              icon = list(
                iconUrl='https://cdn-icons-png.flaticon.com/512/2231/2231549.png',
                iconSize=c(20,20)
-                        )
-             ) 
-
-
+                        ) 
+             ) %>% 
+  addMarkers(lng=-93.606724, lat=42.016527,
+             popup="Walmart Super Centre",
+             icon=list(
+               iconUrl='https://www.pngall.com/wp-content/uploads/12/Walmart-PNG-Cutout.png',
+               iconSize=c(20,20)
+                      )
+             ) %>% 
+  addCircles(~Longitude, ~Latitude, popup=ames_geo$PID, weight=3, radius=30, color="#ffa500", stroke=TRUE,
+             fillOpacity=0.8)
 m
+
+# load data 
+load(file='../data/ames_geo.rda') 
+head(ames_geo)
+
 
 
 ```
