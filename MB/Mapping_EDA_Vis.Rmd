@@ -16,6 +16,7 @@ library(RColorBrewer)
 library(zoom)
 library(ggforce)
 library(ggrepel)
+library(leaflet)
 ```
 
 
@@ -190,9 +191,24 @@ Amesmap_hood = ggplot()+
 
 Amesmap_hood
 
+```
+
+```{r  Leaflet Map }
+
+m <- leaflet() %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>% 
+  setView(lng=-93.626307, lat=42.025318, zoom=12.5) %>% 
+  addMarkers(lng=-93.645829, lat=42.026841,
+             icon = list(
+               iconUrl='https://cdn-icons-png.flaticon.com/512/2231/2231549.png',
+               iconSize=c(20,20)
+                        )
+             ) 
+
+
+m
 
 
 ```
-
 
 
