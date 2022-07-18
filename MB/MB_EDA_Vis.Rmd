@@ -35,6 +35,7 @@ sum(is.na(house_price))  #615 NA values
 house_price[rowSums(is.na(house_price)) > 0, ]
 
 ```
+
 ```{r  What does the distribution of Sale Price look like?}
 
 house_price$SalePriceShort <- round(house_price$SalePrice/1000,2)
@@ -44,7 +45,6 @@ house_price %>% ggplot(aes(x = SalePriceShort)) +
   geom_histogram(aes(y=..density..), bins = 50, col= "white", fill="#698adb") +
   geom_density(col = '#698adb') +
   theme_bw() + 
-  theme_excel_new() + 
   labs(title = "Distribution of House Sale Prices in Ames, Iowa", x = 'Sale Price ($1000 USD)', y='Density') 
 
 
@@ -339,7 +339,7 @@ house_price %>%
 house_price2 <- read.csv("data/Ames_HousePrice_cleaned.csv")
 
 house_price %>% 
-  ggplot(aes(x=Age, y=SalePrice, colour = MasVnrType, alpha=0.6)) +
+  ggplot(aes(x=Age, y=SalePriceShort, colour = MasVnrType, alpha=0.6)) +
   geom_point() +
   theme_bw() + 
   theme_ipsum() + 
