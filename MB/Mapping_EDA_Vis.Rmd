@@ -142,7 +142,6 @@ Amesmap_hoodprice
 
 ```{r  Neighborhood Boundary Zoomed Map }
 
-
 Amesmap_hood = ggplot()+
   geom_sf(data = city$osm_multipolygons,
           color = "#ffffff",
@@ -194,11 +193,26 @@ Amesmap_hood
 
 ```
 
-```{r  Leaflet Map }
+```{r Combining Datasets }  
+
 # load data 
 load(file='../data/ames_geo.rda') 
+ames_geo$PID <- as.numeric(ames_geo$PID)
 head(ames_geo)
 
+# Combining Dataframes 
+ames <- read_csv('../data/Ames_HousePrice_cleaned.csv')
+ames_geo_price <- left_join(ames_geo, 
+                            ames %>% 
+                              select('PID','SalePrice','Neighborhood'), 
+                            by="PID")
+ames_geo_price
+
+
+```
+
+
+```{r  Leaflet Map }
 
 # Mapping Ames 
 m <- leaflet(ames_geo) %>% 
@@ -208,26 +222,24 @@ m <- leaflet(ames_geo) %>%
              popup="Iowa State University",
              icon = list(
                iconUrl='https://cdn-icons-png.flaticon.com/512/2231/2231549.png',
-               iconSize=c(20,20)
+               iconSize=c(21,21)
                         ) 
              ) %>% 
   addMarkers(lng=-93.606724, lat=42.016527,
              popup="Walmart Super Centre",
              icon=list(
-               iconUrl='https://www.pngall.com/wp-content/uploads/12/Walmart-PNG-Cutout.png',
-               iconSize=c(20,20)
+               iconUrl='https://cdn-icons-png.flaticon.com/512/5968/5968752.png',
+               iconSize=c(17,17)
                       )
              ) %>% 
   addCircles(~Longitude, ~Latitude, popup=ames_geo$PID, weight=3, radius=30, color="#ffa500", stroke=TRUE,
              fillOpacity=0.8)
+
 m
-
-# load data 
-load(file='../data/ames_geo.rda') 
-head(ames_geo)
-
-
 
 ```
 
+```{r}
+
+```
 

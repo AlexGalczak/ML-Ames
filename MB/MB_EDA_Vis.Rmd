@@ -350,6 +350,22 @@ house_price %>%
 
 ```
 
+```{r  Exterior quality and mason veneer type} 
+
+
+house_price %>% 
+  ggplot(aes(x=Age, y=SalePriceShort, colour = Foundation, alpha=0.3)) +
+  geom_point() +
+  theme_bw() + 
+  theme_ipsum() + 
+  scale_alpha(guide = "none") + 
+  labs(title = 'House Age by Sale Price Grouped by Foundation', x = 'House Age', y='Sale Price ($1000 USD)') + 
+  scale_color_manual(values=c("#CD7672", "#384E78","#534666", "#EEB462", "#D4CFC9", "#D45769"))
+
+
+```
+
+
 ```{r  Plots for Shiny Price Toggle Bar: Neighborhood price density vs Rest of Ames}
 
 clean_dummy <- read.csv('data/cleaned_dummies.csv')
