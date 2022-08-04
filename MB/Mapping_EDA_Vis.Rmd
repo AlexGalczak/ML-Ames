@@ -208,7 +208,7 @@ ames_geo_price <- left_join(ames_geo,
                             by="PID")
 ames_geo_price
 
-
+ames_geo_price
 ```
 
 
